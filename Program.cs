@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-
+using TORCHAIN.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //My services
 
 builder.Services.AddDbContextFactory<MainDatabase>(db_config => db_config.UseSqlite(builder.Configuration["ConnectionStrings:DB"]));
+builder.Services.AddScoped<IForumRepository,ForumRepository>();
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

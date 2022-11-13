@@ -5,5 +5,6 @@
         public Task AddCategory(string category, bool isverified);
         public Task CheckCategory(CategoryEntity category);
         public Task DeleteCategory(int id);
+        public Task<IEnumerable<CategoryEntity>> GetAllCategories();
     }
 }
