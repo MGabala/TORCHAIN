@@ -1,4 +1,4 @@
-﻿<div class="card">
+﻿<div class="card">    
     <div class="card-header">
         <p style="text-align:center;"><b>Select category</b></p>
         <EditForm Model="@Category">
@@ -9,6 +9,12 @@
                         <option value="@category.Id">@category.Category</option>
                     }
         </InputSelect>
+    </EditForm>
+    </div>
+    <div class="card-header">
+    <EditForm Model="@Category">
+        <p><InputText id="name" class="form-control" placeholder="No category you are interested? Send us a suggestion!" @bind-Value="@Category.Category"></InputText></p>
+            <p><button type="submit" class="btn btn-success">Send suggestion</button></p>
     </EditForm>
     </div>
 </div>
