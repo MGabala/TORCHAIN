@@ -3,11 +3,12 @@
         <p style="text-align:center;"><b>Select category</b></p>
         <EditForm Model="@Category">
             <InputSelect id="category" class="form-select" @bind-Value="@Category.Id">
-                @foreach(var category in Categories!)
-                {
-                    <option >@category.Category</option>
-                }
-            </InputSelect>
-        </EditForm>
+                <option value="0" selected="selected">Categories list</option>
+                @foreach (var category in Categories!)
+                    {
+                        <option value="@category.Id">@category.Category</option>
+                    }
+        </InputSelect>
+    </EditForm>
     </div>
 </div>

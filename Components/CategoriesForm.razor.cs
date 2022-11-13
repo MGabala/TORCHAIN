@@ -13,7 +13,7 @@ namespace TORCHAIN.Components
         private MainDatabase? _context { get; set; }
         [Inject]
         private IForumRepository? _repository { get; set; }
-        public CategoryEntity Category { get; set; } = new();
+        public CategoryEntity Category { get; set; } = new CategoryEntity();
         public IEnumerable<SelectListItem> CategoriesList { get; set; } = null!;
         public IEnumerable<CategoryEntity>? Categories { get; set; }
 
