@@ -32,14 +32,15 @@ namespace TORCHAIN.Repositories
             await factory.SaveChangesAsync();
 
         }
-
+#pragma warning disable CS8634 
         public async Task DeleteCategory(int id)
         {
             using var factory = _contextFactory.CreateDbContext();
             var category = await factory.Categories.FirstOrDefaultAsync(x=>x.Id == id);
-            factory.Remove(category);
+            factory!.Remove(category);
             await factory.SaveChangesAsync();
         }
+#pragma warning restore CS8634
 
         public async Task<IEnumerable<CategoryEntity>> GetAllCategories()
         {

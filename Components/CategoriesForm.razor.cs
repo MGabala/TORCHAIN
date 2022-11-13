@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using TORCHAIN.Models;
 using TORCHAIN.Repositories;
 
 namespace TORCHAIN.Components
@@ -15,7 +19,7 @@ namespace TORCHAIN.Components
         private IForumRepository? _repository { get; set; }
         public CategoryEntity Category { get; set; } = new CategoryEntity();
         public IEnumerable<SelectListItem> CategoriesList { get; set; } = null!;
-        public IEnumerable<CategoryEntity>? Categories { get; set; }
+        public IEnumerable<CategoryEntity> Categories { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
@@ -25,7 +29,8 @@ namespace TORCHAIN.Components
             //    Value = x.Category,
             //    Text = x.Category
             //}).ToList();
-            Categories = await _repository!.GetAllCategories();
+
+            Categories = await _repository.GetAllCategories();
         }
     }
 }

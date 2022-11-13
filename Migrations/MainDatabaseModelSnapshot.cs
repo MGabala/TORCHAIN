@@ -35,6 +35,21 @@ namespace TORCHAIN.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("TORCHAIN.Entities.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Items");
+                });
+
             modelBuilder.Entity("TORCHAIN.Entities.PostEntity", b =>
                 {
                     b.Property<int>("Id")

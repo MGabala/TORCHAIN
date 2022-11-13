@@ -2,9 +2,9 @@
     <div class="card-header">
         <p style="text-align:center;"><b>Select category</b></p>
         <EditForm Model="@Category">
-            <InputSelect id="category" class="form-select" @bind-Value="@Category.Id">
-                <option value="0" selected="selected">Categories list</option>
-                @foreach (var category in Categories!)
+            <InputSelect id="category" class="form-select" @bind-Value="@Category.Category">
+              @*  <option value="0" selected="selected">Categories list</option>*@
+                @foreach (var category in Categories)
                     {
                         <option value="@category.Id">@category.Category</option>
                     }
@@ -18,3 +18,4 @@
     </EditForm>
     </div>
 </div>
+
