@@ -8,5 +8,6 @@ namespace TORCHAIN.Data
 
         }
         public DbSet<PostEntity> Posts => Set<PostEntity>();
+        public DbSet<CategoryEntity> Categories => Set<CategoryEntity>();
     }
 }

@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Components\" />
     <Folder Include="Widgets\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
