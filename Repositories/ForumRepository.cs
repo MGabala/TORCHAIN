@@ -1,8 +1,10 @@
-﻿namespace TORCHAIN.Repositories
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace TORCHAIN.Repositories
 {
     public class ForumRepository : IForumRepository
     {
-        private IDbContextFactory<MainDatabase> _context;
+        private readonly IDbContextFactory<MainDatabase> _context;
         public ForumRepository(IDbContextFactory<MainDatabase> context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -33,9 +35,10 @@
         {
             using var factory = _context.CreateDbContext();
             var category = await factory.Categories.FirstOrDefaultAsync(x=>x.Id == id);
-            factory.RemoveAsync(category);
+            factory.Remove(category);
             await factory.SaveChangesAsync();
         }
+
         #endregion
     }
 }
