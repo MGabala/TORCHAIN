@@ -13,7 +13,7 @@
     </div>
     <div class="card-header">
 
-        <EditForm Model="@Category" OnValidSubmit="@AddCategory" OnInvalidSubmit="@Invalid">
+        <EditForm Model="@NewCategory" OnValidSubmit="@AddCategory" OnInvalidSubmit="@Invalid">
             <DataAnnotationsValidator />
            @if (Fail == false)
             {
@@ -27,12 +27,13 @@
                 <div class="alert @Status">
                     <p>Great, we will check your suggestion and add it soon.</p>
                 </div>    
+                
+                
             }
-            <p><InputText id="categoryName" class="form-control" placeholder="No category you are interested? Send us a suggestion!" @bind-Value="@Category.Category"></InputText></p>
-            <ValidationMessage For="@(()=>Category.Category)" />
+            <p><InputText id="categoryName" class="form-control" placeholder="No category you are interested? Send us a suggestion!" @bind-Value="@NewCategory.Category"></InputText></p>
+            <ValidationMessage For="@(()=>NewCategory.Category)" />
 
             <p><button type="submit" class="btn btn-success">Add category</button></p>
-
         </EditForm>
     </div>
 </div>

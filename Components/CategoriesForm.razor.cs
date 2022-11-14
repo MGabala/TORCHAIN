@@ -20,6 +20,7 @@ namespace TORCHAIN.Components
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         public CategoryEntity Category { get; set; } = new CategoryEntity();
+        public CategoryEntity NewCategory { get; set; } = new CategoryEntity();
         public IEnumerable<SelectListItem> CategoriesList { get; set; } = null!;
         public IEnumerable<CategoryEntity>? Categories { get; set; }
 
@@ -34,16 +35,18 @@ namespace TORCHAIN.Components
 
         private async Task AddCategory()
         {
-            await _repository!.AddCategory(category: Category.Category!,isverified: false);
+            await _repository!.AddCategory(category: NewCategory.Category!,isverified: false);
             Status = "alert-success";
             Success = true;
             Categories = await _repository!.GetAllCategories();
+            
         }
         private async Task Invalid()
         {
             Status = "alert-danger";
             Fail = false;
         }
+
         #endregion
     }
 }
