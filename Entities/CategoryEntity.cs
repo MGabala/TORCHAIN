@@ -7,7 +7,8 @@ namespace TORCHAIN.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Category { get; set; }
+        [Required,MinLength(3)]
+        public string? Category { get; set; }
         public bool IsVerified { get; set; } 
     }
 }

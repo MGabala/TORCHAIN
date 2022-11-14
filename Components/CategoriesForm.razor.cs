@@ -17,20 +17,33 @@ namespace TORCHAIN.Components
         private MainDatabase? _context { get; set; }
         [Inject]
         private IForumRepository? _repository { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
         public CategoryEntity Category { get; set; } = new CategoryEntity();
         public IEnumerable<SelectListItem> CategoriesList { get; set; } = null!;
-        public IEnumerable<CategoryEntity> Categories { get; set; }
+        public IEnumerable<CategoryEntity>? Categories { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
-            //using var factory = _contextFactory?.CreateDbContext();
-            //CategoriesList = factory!.Categories.Where(x => x.IsVerified == true).Select(x => new SelectListItem
-            //{
-            //    Value = x.Category,
-            //    Text = x.Category
-            //}).ToList();
-
-            Categories = await _repository.GetAllCategories();
+            Categories = await _repository!.GetAllCategories();
         }
+        #region AddNewCategory
+        protected bool Fail = true;
+        protected bool Success = false;
+        protected string Status = string.Empty;
+
+        private async Task AddCategory()
+        {
+            await _repository!.AddCategory(category: Category.Category!,isverified: false);
+            Status = "alert-success";
+            Success = true;
+            Categories = await _repository!.GetAllCategories();
+        }
+        private async Task Invalid()
+        {
+            Status = "alert-danger";
+            Fail = false;
+        }
+        #endregion
     }
 }
