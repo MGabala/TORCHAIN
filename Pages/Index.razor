@@ -12,7 +12,7 @@
         <div class="form-group">
             <p><label>Message: <input @bind="messageInput" size="50" /></label></p>
         </div>
-        <button @onclick="Send" disabled="@(!IsConnected)">Send</button>
+        <button class="btn btn-primary" @onclick="Send" disabled="@(!IsConnected)">Send</button>
     </div>
     <div class="col">
     <ul id="messagesList">

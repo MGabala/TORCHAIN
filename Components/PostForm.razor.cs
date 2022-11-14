@@ -16,5 +16,27 @@ namespace TORCHAIN.Components
         public NavigationManager NavigationManager { get; set; }
         public PostEntity Post { get; set; } = new PostEntity();
         public IEnumerable<PostEntity>? Posts { get; set; }
+        public IEnumerable<CategoryEntity>? Categories { get; set; }
+
+        protected async override Task OnInitializedAsync()
+        {
+            Categories = await _repository!.GetAllCategories();
+        }
+
+        #region AddNewPost
+        protected bool Fail = true;
+        protected bool Success = false;
+        protected string Status = string.Empty;
+
+        private async Task AddPost()
+        {
+
+        }
+        private async Task Invalid()
+        {
+
+        }
+
+        #endregion
     }
 }
