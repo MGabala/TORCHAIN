@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
 
 namespace TORCHAIN.Repositories
 {
@@ -47,6 +48,27 @@ namespace TORCHAIN.Repositories
            return await _context.Categories.OrderBy(x=>x.Id).ToListAsync();
         }
 
+        #endregion
+
+        #region Posts
+        public async Task AddPost(string title, string description, string author, string category, bool isverified, DateTime creationtime)
+        {
+            await _context.Posts.AddAsync(new PostEntity
+            {
+                Title = title,
+                Description = description,
+                Author = author,
+                Category = category,
+                IsVerified = isverified,
+                CreationTime = creationtime
+            });
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<PostEntity>> GetAllPosts()
+        {
+            return await _context.Posts.OrderBy(x => x.Id).ToListAsync();
+        }
         #endregion
     }
 }

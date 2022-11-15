@@ -13,7 +13,7 @@ namespace TORCHAIN.Components
         [Inject]
         private IForumRepository? _repository { get; set; }
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public NavigationManager? NavigationManager { get; set; }
         public PostEntity Post { get; set; } = new PostEntity();
         public IEnumerable<PostEntity>? Posts { get; set; }
         public IEnumerable<CategoryEntity>? Categories { get; set; }
@@ -30,7 +30,9 @@ namespace TORCHAIN.Components
 
         private async Task AddPost()
         {
-
+            await _repository!.AddPost(Post.Title, Post.Description, Post.Author, Post.Category, false, DateTime.Now);
+            Status = "alert-success";
+            Success = true;
         }
         private async Task Invalid()
         {
