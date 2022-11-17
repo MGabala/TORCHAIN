@@ -1,40 +1,52 @@
-﻿<div class="card">    
-    <div class="card-header">
+﻿
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
         <p style="text-align:center;"><b>Select category</b></p>
         <EditForm Model="@Category">
-            <InputSelect id="category" class="form-select" @bind-Value="@Category.Category">
+           <p> <InputSelect id="category" class="form-select" @bind-Value="@Category.Category">
               @*  <option value="0" selected="selected">Categories list</option>*@
                 @foreach (var category in Categories!)
                     {
                         <option value="@category.Id">@category.Category</option>
                     }
-        </InputSelect>
+
+                </InputSelect>
+            </p>
+            <p><button type="submit" class="btn btn-primary">Select</button></p>
     </EditForm>
     </div>
-    <div class="card-header">
+    </div>
+    </div>
+    <div class="col">
+        <div class="card">
+        <div class="card-header">
+            <p style="text-align:center;"><b>Send suggestion</b></p>
+            <EditForm Model="@NewCategory" OnValidSubmit="@AddCategory" OnInvalidSubmit="@Invalid">
+                <DataAnnotationsValidator />
+                @if (Fail == false)
+                {
+                    <div class="alert @Status">
+                        <p>Fix errors and try again.</p>
+                        <ValidationSummary />
+                    </div>
+                }
+                @if (Success == true)
+                {
+                    <div class="alert @Status">
+                        <p>Great, we will check your suggestion and add it soon.</p>
+                    </div>
 
-        <EditForm Model="@NewCategory" OnValidSubmit="@AddCategory" OnInvalidSubmit="@Invalid">
-            <DataAnnotationsValidator />
-           @if (Fail == false)
-            {
-                <div class="alert @Status">
-                    <p>Fix errors and try again.</p>
-                    <ValidationSummary/>
-                </div>
-            }
-            @if(Success == true)
-            {
-                <div class="alert @Status">
-                    <p>Great, we will check your suggestion and add it soon.</p>
-                </div>    
-                
-                
-            }
-            <p><InputText id="categoryName" class="form-control" placeholder="No category you are interested? Send us a suggestion!" @bind-Value="@NewCategory.Category"></InputText></p>
-            <ValidationMessage For="@(()=>NewCategory.Category)" />
 
-            <p><button type="submit" class="btn btn-success">Add category</button></p>
-        </EditForm>
+                }
+                <p><InputText id="categoryName" class="form-control" placeholder="No category you are interested? Send us a suggestion!" @bind-Value="@NewCategory.Category"></InputText></p>
+                <ValidationMessage For="@(()=>NewCategory.Category)" />
+
+                <p><button type="submit" class="btn btn-success">Add category</button></p>
+            </EditForm>
+        </div>
     </div>
 </div>
-
+</div>

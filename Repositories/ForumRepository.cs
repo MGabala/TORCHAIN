@@ -67,7 +67,7 @@ namespace TORCHAIN.Repositories
 
         public async Task<IEnumerable<PostEntity>> GetAllPosts()
         {
-            return await _context.Posts.OrderBy(x => x.Id).ToListAsync();
+            return await _context.Posts.OrderByDescending(x => x.Id).ToListAsync();
         }
         #endregion
     }

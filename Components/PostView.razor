@@ -1,3 +1,42 @@
 ﻿@foreach(var post in Posts){
-    <p>@post.Title</p>
+    <p>
+<div class="col-md-12">
+<div class="card">
+            <div class="card-header">
+               <div class="row">
+                   <div class="col" style="text-align:center;">Post</div>
+                        <div class="col" style="text-align:center;">Comment</div>
+               </div>
+            </div>
+<div class="row">
+        <div class="col">
+            <div class="card-body">
+                      <div class="card-text">
+                        <p><b>Title: </b> @post.Title</p>
+                        <p> <b>Description: </b> @post.Description</p>
+                        <p> <b>Nick: </b> @post.Author</p>
+                        <p> <b>Category: </b> @post.Category</p>
+                        <p> <b>Created: </b> @post.CreationTime</p>
+                      </div>
+            <div class="input-group mb-2">
+                    <input type="text" class="form-control col-3" placeholder="Your comment" name="comment">
+                    <span class="input-group-text"></span>
+                    <input type="text" class="form-control col-3" placeholder="Your nick" name="author">
+                    <button class="btn btn-success" asp-route-postid="@post.Id" asp-route-comment="comment" asp-route-author="author"> Add comment </button>
+             </div>
+            </div>
+        </div>
+        <div class="col" style="padding:30px;">
+             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
+             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
+             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
+             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
+             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
+        </div>
+
+                
+</div>
+</div>
+</div>
+    </p>
 }
