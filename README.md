@@ -1,5 +1,4 @@
 # TORCHAIN
-Forum project created with Blazor server host model. I am focusing at blazor, because i can see potential!
 
 Forum view
 
