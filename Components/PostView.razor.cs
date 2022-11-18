@@ -23,6 +23,7 @@ namespace TORCHAIN.Components
         protected async override Task OnInitializedAsync()
         {
              Posts = await _repository!.GetAllPosts();
+             Comments = await _repository!.GetAllComments();
         }
         #region Comments
         protected bool Fail = true;
@@ -31,8 +32,8 @@ namespace TORCHAIN.Components
 
         private async Task OnValidComment()
         {
-
-
+           await _repository!.AddComment(Comment.CommentDescription,Comment.CommentAuthor,1,false,DateTime.Now);
+           Comments = await _repository!.GetAllComments();
         }
         private async Task OnInvalidComment()
         {

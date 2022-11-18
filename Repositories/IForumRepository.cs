@@ -13,5 +13,10 @@
         public Task AddPost(string title, string description, string author, string category, bool isverified, DateTime creationtime);
         public Task<IEnumerable<PostEntity>> GetAllPosts();
         #endregion
+
+        #region Comments
+        public Task AddComment(string comment,string author,int postId,bool isVerified,DateTime creationtime);
+        public Task<IEnumerable<CommentEntity>> GetAllComments();
+        #endregion
     }
 }

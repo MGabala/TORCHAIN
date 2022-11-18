@@ -69,6 +69,26 @@ namespace TORCHAIN.Repositories
         {
             return await _context.Posts.OrderByDescending(x => x.Id).ToListAsync();
         }
+
+        #endregion
+
+        #region Comments
+        public async Task AddComment(string comment, string author, int postId, bool isVerified, DateTime creationtime)
+        {
+            await _context.Comments.AddAsync(new CommentEntity
+            {
+                CommentDescription = comment,
+                CommentAuthor = author,
+                PostId = postId,
+                IsVerified = isVerified,
+                CreationTime = creationtime
+            });
+           await _context.SaveChangesAsync();
+        }
+        public async Task<IEnumerable<CommentEntity>> GetAllComments()
+        {
+            return await _context.Comments.OrderByDescending(x=>x.Id).ToListAsync();
+        }
         #endregion
     }
 }

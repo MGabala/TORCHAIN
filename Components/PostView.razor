@@ -1,4 +1,4 @@
-﻿@foreach(var post in Posts){
+﻿@foreach(var post in Posts!){
  
 <div class="col-md-12">
 <div class="card">
@@ -31,17 +31,17 @@
                                     <ValidationSummary />
                                     <div class="row">
                                         <div class="col-md-6">
-                                        <p> <InputText type="text" class="form-control" placeholder="Your comment" id="name" @bind-Value="@Comment.CommentDescription"></InputText></p>
+                                        <p> <InputText type="text" class="form-control" placeholder="Your comment" id="comment" @bind-Value="@Comment.CommentDescription"></InputText></p>
                                             <ValidationMessage For="@(()=>Comment.CommentDescription)" />
                                         </div>
 
                                         <div class="col-md-6">
-                                        <p> <InputText type="text" class="form-control" placeholder="Your comment" id="name" @bind-Value="@Comment.CommentAuthor"></InputText></p>
+                                        <p> <InputText type="text" class="form-control" placeholder="Your nick" id="name" @bind-Value="@Comment.CommentAuthor"></InputText></p>
                                             <ValidationMessage For="@(()=>Comment.CommentAuthor)" />
                                         </div>
                                     </div>
 
-                                    <p><button type="submit" class="btn btn-success">Test</button></p>
+                                    <p><button type="submit" class="btn btn-success">Add comment</button></p>
                                 </EditForm>
                            
                         </form>
@@ -72,12 +72,12 @@
             </div>
         </div>
         <div class="col" style="padding:30px;">
-             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
-             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
-             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
-             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
-             <div class="well" style="background-color:lightgray;"><p style="padding:3px;">Test comment</p></div>
-        </div>
+                    @foreach(var comment in Comments!)
+                    {
+
+                        <div class="well" style="background-color:lightgray;"><p style="padding:3px;">@comment.CommentDescription</p></div>
+                    }
+                </div>
 
                 
 </div>

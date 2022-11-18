@@ -18,7 +18,7 @@ namespace TORCHAIN.Components
         [Inject]
         private IForumRepository? _repository { get; set; }
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public NavigationManager? NavigationManager { get; set; }
         public CategoryEntity Category { get; set; } = new CategoryEntity();
         public CategoryEntity NewCategory { get; set; } = new CategoryEntity();
         public IEnumerable<SelectListItem> CategoriesList { get; set; } = null!;
