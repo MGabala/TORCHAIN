@@ -18,12 +18,33 @@
                         <p> <b>Category: </b> @post.Category</p>
                         <p> <b>Created: </b> @post.CreationTime</p>
                       </div>
-            <div class="input-group mb-2">
-                    <input type="text" class="form-control col-3" placeholder="Your comment" name="comment">
-                    <span class="input-group-text"></span>
-                    <input type="text" class="form-control col-3" placeholder="Your nick" name="author">
-                    <button class="btn btn-success" asp-route-postid="@post.Id" asp-route-comment="comment" asp-route-author="author"> Add comment </button>
-             </div>
+                        <form method="post">
+@*                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Your comment" name="comment" value="@Comment.CommentDescription">
+                                <span class="input-group-text"></span>
+                                <input type="text" class="form-control" placeholder="Your nick" name="author" value="@Comment.CommentAuthor">
+                                <button class="btn btn-success" asp-route-postid="@post.Id" asp-route-comment="comment" asp-route-author="author"> Add comment </button>
+                            </div>*@
+                            
+                                <EditForm Model="@Comment" OnValidSubmit="@OnValidComment" OnInvalidSubmit="@OnInvalidComment">
+                                    <DataAnnotationsValidator />
+                                    <ValidationSummary />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        <p> <InputText type="text" class="form-control" placeholder="Your comment" id="name" @bind-Value="@Comment.CommentDescription"></InputText></p>
+                                            <ValidationMessage For="@(()=>Comment.CommentDescription)" />
+                                        </div>
+
+                                        <div class="col-md-6">
+                                        <p> <InputText type="text" class="form-control" placeholder="Your comment" id="name" @bind-Value="@Comment.CommentAuthor"></InputText></p>
+                                            <ValidationMessage For="@(()=>Comment.CommentAuthor)" />
+                                        </div>
+                                    </div>
+
+                                    <p><button type="submit" class="btn btn-success">Test</button></p>
+                                </EditForm>
+                           
+                        </form>
              
                         <!-- Modal -->
                         <form method="get">

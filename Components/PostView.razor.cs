@@ -16,12 +16,30 @@ namespace TORCHAIN.Components
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
         public PostEntity Post { get; set; } = new PostEntity();
+        public CommentEntity Comment { get; set; } = new CommentEntity();
         public IEnumerable<PostEntity>? Posts { get; set; }
+        public IEnumerable<CommentEntity>? Comments { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
              Posts = await _repository!.GetAllPosts();
         }
+        #region Comments
+        protected bool Fail = true;
+        protected bool Success = false;
+        protected string Status = string.Empty;
 
+        private async Task OnValidComment()
+        {
+
+
+        }
+        private async Task OnInvalidComment()
+        {
+            Status = "alert-danger";
+            Fail = false;
+        }
+
+        #endregion
     }
 }
