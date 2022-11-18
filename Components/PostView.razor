@@ -1,11 +1,11 @@
 ﻿@foreach(var post in Posts){
-    <p>
+ 
 <div class="col-md-12">
 <div class="card">
             <div class="card-header">
                <div class="row">
                    <div class="col" style="text-align:center; font-weight:bold;">Post</div>
-                        <div class="col" style="text-align:center; font-weight:bold;">Comments</div>
+                        <div class="col" style="text-align:center; font-weight:bold;">Most popular comments</div>
                </div>
             </div>
 <div class="row">
@@ -24,6 +24,30 @@
                     <input type="text" class="form-control col-3" placeholder="Your nick" name="author">
                     <button class="btn btn-success" asp-route-postid="@post.Id" asp-route-comment="comment" asp-route-author="author"> Add comment </button>
              </div>
+             
+                        <!-- Modal -->
+                        <form method="get">
+                            <div class="py-2">
+                              <button type="button" data-bs-target="#Modal_@post.Id" name="Id" value="@post.Id" class="btn btn-primary" data-bs-toggle="modal">Show all comments</button>
+                            </div>
+                        </form>
+                        <div class="modal fade" id="Modal_@post.Id" tabindex="-1" aria-hidden="true">
+
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
             </div>
         </div>
         <div class="col" style="padding:30px;">
@@ -36,7 +60,7 @@
 
                 
 </div>
+
 </div>
 </div>
-    </p>
 }
