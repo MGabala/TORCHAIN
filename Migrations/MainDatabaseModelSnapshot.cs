@@ -35,19 +35,32 @@ namespace TORCHAIN.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("TORCHAIN.Entities.Item", b =>
+            modelBuilder.Entity("TORCHAIN.Entities.CommentEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("CommentAuthor")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("CommentDescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("TORCHAIN.Entities.PostEntity", b =>
@@ -58,6 +71,7 @@ namespace TORCHAIN.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
+                        .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Category")
@@ -69,6 +83,7 @@ namespace TORCHAIN.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(250)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsVerified")
@@ -76,6 +91,7 @@ namespace TORCHAIN.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
