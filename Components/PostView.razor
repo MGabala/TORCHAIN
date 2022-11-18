@@ -19,13 +19,6 @@
                         <p> <b>Created: </b> @post.CreationTime</p>
                       </div>
                         <form method="post">
-@*                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Your comment" name="comment" value="@Comment.CommentDescription">
-                                <span class="input-group-text"></span>
-                                <input type="text" class="form-control" placeholder="Your nick" name="author" value="@Comment.CommentAuthor">
-                                <button class="btn btn-success" asp-route-postid="@post.Id" asp-route-comment="comment" asp-route-author="author"> Add comment </button>
-                            </div>*@
-                            
                                 <EditForm Model="@Comment" OnValidSubmit="@OnValidComment" OnInvalidSubmit="@OnInvalidComment">
                                     <DataAnnotationsValidator />
                                     <ValidationSummary />
@@ -43,7 +36,6 @@
 
                                     <p><button type="submit" class="btn btn-success">Add comment</button></p>
                                 </EditForm>
-                           
                         </form>
              
                         <!-- Modal -->
@@ -61,6 +53,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
+                                        @foreach(var comment in Comments!)
+                                        {
+                                            <p>@comment.CommentDescription</p>
+                                        }
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
