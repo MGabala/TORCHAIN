@@ -97,6 +97,18 @@ namespace TORCHAIN.Repositories
             using var factory = _contextFactory.CreateDbContext();
             return await factory.Websites.OrderBy(x => x.Id).ToListAsync();
         }
+        public async Task AddWebsite(string www, string description, bool isVerified, DateTime creationtime)
+        {
+            using var factory = _contextFactory.CreateDbContext();
+            await factory.Websites.AddAsync(new HiddenWikiEntity
+            {
+                WWW = www,
+                Description = description,
+                IsVerified = isVerified,
+                CreationTime = creationtime
+            });
+            await factory.SaveChangesAsync();
+        }
         #endregion
     }
 }

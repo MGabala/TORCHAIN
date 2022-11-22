@@ -11,5 +11,31 @@ namespace TORCHAIN.Components.HiddenWiki
         public NavigationManager? NavigationManager { get; set; }
         public HiddenWikiEntity Website { get; set; } = new HiddenWikiEntity();
         public IEnumerable<HiddenWikiEntity>? Websites { get; set; }
+        protected bool Fail = true;
+        protected bool Success = false;
+        protected string Status = string.Empty;
+        protected async override Task OnInitializedAsync()
+        {
+            Websites = await _repository!.GetAllWebsites();
+        }
+        private async Task ValidRequest()
+        {
+            try
+            {
+                await _repository!.AddWebsite(Website.WWW, Website.Description, false, DateTime.Now);
+                Status = "alert-success";
+                Success = true;
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+        }
+        private async Task InvalidRequest()
+        {
+            Status = "alert-danger";
+            Fail = false;
+        }
+
     }
 }

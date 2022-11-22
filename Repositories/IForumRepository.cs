@@ -20,6 +20,7 @@
         #endregion
         #region HiddenWiki
         public Task<IEnumerable<HiddenWikiEntity>> GetAllWebsites();
+        public Task AddWebsite(string www, string description, bool isVerified, DateTime creationtime);
         #endregion
     }
 }
