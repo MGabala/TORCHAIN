@@ -1,4 +1,6 @@
 ﻿
+using TORCHAIN.Pages;
+
 namespace TORCHAIN.Data
 {
     public class MainDatabase : DbContext
@@ -10,5 +12,6 @@ namespace TORCHAIN.Data
         public DbSet<PostEntity> Posts => Set<PostEntity>();
         public DbSet<CategoryEntity> Categories => Set<CategoryEntity>();
         public DbSet<CommentEntity> Comments => Set<CommentEntity>();
+        public DbSet<HiddenWikiEntity> Websites => Set<HiddenWikiEntity>();
     }
 }

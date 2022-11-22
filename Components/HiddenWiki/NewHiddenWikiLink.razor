@@ -1,0 +1,37 @@
+﻿<div class="card">
+                <div class="card-header">
+                    <center><b>Share your site with our community!</b></center>
+                </div>
+                <div class="card-body">
+
+                </div>
+</div>
+
+@*
+<EditForm Model="@Post" OnValidSubmit="@AddPost" OnInvalidSubmit="@Invalid">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    @if (Success == true)
+    {
+        <div class="alert @Status">
+            <p>Your post must be reviewed by administrator. Soon will be published.</p>
+        </div>
+    }
+
+    <p><InputText name="title" class="form-control" placeholder="Post title" @bind-Value="@Post.Title"></InputText></p>
+    <p><InputTextArea name="title" class="form-control" placeholder="Post description" @bind-Value="@Post.Description"></InputTextArea></p>
+    <p><InputText name="title" class="form-control" placeholder="Nick" @bind-Value="@Post.Author"></InputText></p>
+    <p>
+        <InputSelect id="category" class="form-select" @bind-Value="@Post.Category">
+            <option value="0" selected="selected">Categories list</option>
+            @foreach (var category in Categories!)
+            {
+                <option value="@category.Category">@category.Category</option>
+
+            }
+        </InputSelect>
+    </p>
+    <ValidationMessage For="@(()=>Post.Title)" />
+
+    <p><button type="submit" class="btn btn-success">Post</button></p>
+</EditForm>*@

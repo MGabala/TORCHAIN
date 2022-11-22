@@ -7,10 +7,10 @@ namespace TORCHAIN.Components
 {
     public partial class PostView
     {
-        [Inject]
-        private IDbContextFactory<MainDatabase>? _contextFactory { get; set; }
-        [Inject]
-        private MainDatabase? _context { get; set; }
+        //[Inject]
+        //private IDbContextFactory<MainDatabase>? _contextFactory { get; set; }
+        //[Inject]
+        //private MainDatabase? _context { get; set; }
         [Inject]
         private IForumRepository? _repository { get; set; }
         [Inject]

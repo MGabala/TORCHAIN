@@ -18,5 +18,8 @@
         public Task AddComment(string comment,string author,int postId,bool isVerified,DateTime creationtime);
         public Task<IEnumerable<CommentEntity>> GetAllComments();
         #endregion
+        #region HiddenWiki
+        public Task<IEnumerable<HiddenWikiEntity>> GetAllWebsites();
+        #endregion
     }
 }

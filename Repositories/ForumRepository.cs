@@ -90,5 +90,13 @@ namespace TORCHAIN.Repositories
             return await _context.Comments.OrderByDescending(x=>x.Id).ToListAsync();
         }
         #endregion
+
+        #region HiddenWiki
+        public async Task<IEnumerable<HiddenWikiEntity>> GetAllWebsites()
+        {
+            using var factory = _contextFactory.CreateDbContext();
+            return await factory.Websites.OrderBy(x => x.Id).ToListAsync();
+        }
+        #endregion
     }
 }
