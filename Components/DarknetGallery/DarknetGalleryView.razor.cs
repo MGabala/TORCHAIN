@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.IO;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using TORCHAIN.Repositories;
@@ -14,26 +17,35 @@ namespace TORCHAIN.Components.DarknetGallery
         private IWebHostEnvironment? _environment { get; set; }
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
-        public DarknetGalleryEntity DarknetGallery { get; set; } = new DarknetGalleryEntity();
+        [BindProperty]
+        public DarknetGalleryEntity Media { get; set; }
+        public DarknetGalleryEntity Image { get; set; } = new DarknetGalleryEntity();
         public IEnumerable<DarknetGalleryEntity>? Gallery { get; set; }
         protected bool Fail = true;
         protected bool Success = false;
         protected string Status = string.Empty;
+       
 
         //Upload file
         private IBrowserFile selectedFile;
-        private void OnInputFileChange(InputFileChangeEventArgs input)
+        private async void OnInputFileChange(InputFileChangeEventArgs input)
         {
+            
             selectedFile = input.File;
             StateHasChanged();
+            var path = Path.Combine(_environment!.ContentRootPath,"wwwroot/gallery",selectedFile.Name);
+            await using FileStream fs = new(path, FileMode.Create);
+            await selectedFile.OpenReadStream().CopyToAsync(fs);
 
-            ////handle image upload
-            //string currentUrl = _httpContextAccessor.HttpContext.Request.Host.Value;
-            //var path = $"\\wwwroot\\gallery";
-            //var fileStream = System.IO.File.Create(path);
-            //fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
-            //fileStream.Close();
+        }
+        private async Task ValidRequest()
+        {
 
+        }
+        private async Task InvalidRequest()
+        {
+            Status = "alert-danger";
+            Fail = false;
         }
     }
 }

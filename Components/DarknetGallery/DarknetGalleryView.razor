@@ -1,6 +1,15 @@
-﻿<p>
-    Input File
-    <EditForm Model="@DarknetGallery">
+﻿
+
+
+
+        <EditForm Model="@Image" OnValidSubmit="@ValidRequest" OnInvalidSubmit="@InvalidRequest">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+
+   
         <InputFile OnChange="OnInputFileChange" />
-    </EditForm>
-</p>
+   
+
+            <p><button type="submit" class="btn btn-success">Post</button></p>
+        </EditForm>
