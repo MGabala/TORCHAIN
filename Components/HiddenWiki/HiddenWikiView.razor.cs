@@ -3,7 +3,7 @@ using TORCHAIN.Repositories;
 
 namespace TORCHAIN.Components.HiddenWiki
 {
-    public partial class NewHiddenWikiLink
+    public partial class HiddenWikiView
     {
         [Inject]
         private IForumRepository? _repository { get; set; }

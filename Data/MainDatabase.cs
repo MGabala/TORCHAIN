@@ -13,5 +13,6 @@ namespace TORCHAIN.Data
         public DbSet<CategoryEntity> Categories => Set<CategoryEntity>();
         public DbSet<CommentEntity> Comments => Set<CommentEntity>();
         public DbSet<HiddenWikiEntity> Websites => Set<HiddenWikiEntity>();
+        public DbSet<DarknetGalleryEntity> DarknetGallery => Set<DarknetGalleryEntity>();
     }
 }
