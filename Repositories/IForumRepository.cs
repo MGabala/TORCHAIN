@@ -22,5 +22,10 @@
         public Task<IEnumerable<HiddenWikiEntity>> GetAllWebsites();
         public Task AddWebsite(string www, string description, bool isVerified, DateTime creationtime);
         #endregion
+
+        #region Gallery
+        public Task AddImage(string name, DateTime creationTime, bool isVerified);
+        public Task<IEnumerable<DarknetGalleryEntity>> GetAllImages();
+        #endregion
     }
 }

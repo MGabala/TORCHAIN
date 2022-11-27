@@ -1,15 +1,38 @@
 ﻿
 
 
-
+<p>
         <EditForm Model="@Image" OnValidSubmit="@ValidRequest" OnInvalidSubmit="@InvalidRequest">
             <DataAnnotationsValidator />
             <ValidationSummary />
 
-
-   
-        <InputFile OnChange="OnInputFileChange" />
-   
-
-            <p><button type="submit" class="btn btn-success">Post</button></p>
+            <div class="card">
+     <div class="card-header">
+         <center><b>Add Media</b></center>
+      </div>
+      <div class="card-body">
+            <p><InputFile OnChange="OnInputFileChange" class="form-control" /></p>
+            <p><button type="submit" class="btn btn-success">Upload</button></p>
+      </div>
+      </div>
         </EditForm>
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <center><b>Dark Net gallery</b></center>
+    </div>
+    <div class="card-body">
+        @if (Gallery!.Count() == 0)
+        {
+            <center><p class="card-body"><h1>Empty</h1></p></center>
+        }
+        else
+            @foreach (var item in Gallery!)
+            {
+                <a target="_blank" href="/gallery/@item.ImageFileName">
+                    <img src="/gallery/@item.ImageFileName" width="400" height="400">
+                </a>
+            }
+    </div><br />
+</div>

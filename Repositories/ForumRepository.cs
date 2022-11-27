@@ -110,5 +110,25 @@ namespace TORCHAIN.Repositories
             await factory.SaveChangesAsync();
         }
         #endregion
+
+        #region Gallery
+        public async Task AddImage(string name, DateTime creationTime, bool isVerified)
+        {
+            using var factory = _contextFactory.CreateDbContext();
+            await factory.DarknetGallery.AddAsync(new DarknetGalleryEntity
+            {
+                ImageFileName = name,
+                CreationTime = DateTime.Now,
+                IsVerified = false
+            });
+            await factory.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<DarknetGalleryEntity>> GetAllImages()
+        {
+            using var factory = _contextFactory.CreateDbContext();
+            return await factory.DarknetGallery.OrderBy(x=>x.Id).ToListAsync();
+        }
+        #endregion
     }
 }

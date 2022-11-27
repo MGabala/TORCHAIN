@@ -25,17 +25,21 @@ namespace TORCHAIN.Components.DarknetGallery
         protected bool Success = false;
         protected string Status = string.Empty;
 
+        protected async override Task OnInitializedAsync()
+        {
+            Gallery = await _repository!.GetAllImages();
+        }
 
         //Upload file
         private IBrowserFile selectedFile = null!;
         private async void OnInputFileChange(InputFileChangeEventArgs input)
         {
             selectedFile = input.File;
-            StateHasChanged();
-            var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", $"{Guid.NewGuid().ToString()}{selectedFile.Name.Substring(selectedFile.Name.IndexOf('.'))}");
+            var anonymizedFileName = $"{Guid.NewGuid().ToString()}{selectedFile.Name.Substring(selectedFile.Name.IndexOf('.'))}";
+            var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", anonymizedFileName);
             await using FileStream fs = new(path, FileMode.Create);
             await selectedFile.OpenReadStream().CopyToAsync(fs);
-
+            await _repository!.AddImage(anonymizedFileName, DateTime.Now, false);
         }
         private async Task ValidRequest()
         {
