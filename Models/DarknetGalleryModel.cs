@@ -5,7 +5,7 @@ namespace TORCHAIN.Models
     public partial class DarknetGalleryModel
     {
         public int Id { get; set; }
-        public string ImageFileName { get; set; }
+        public string? ImageFileName { get; set; }
         [NotMapped]
         public byte[]? ImageContent { get; set; }
         public DateTime CreationTime { get; set; }

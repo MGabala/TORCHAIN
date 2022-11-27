@@ -7,7 +7,7 @@ namespace TORCHAIN.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string ImageFileName { get; set; }
+        public string? ImageFileName { get; set; }
         [NotMapped]
         public byte[]? ImageContent { get; set; }
         public DateTime CreationTime { get; set; }

@@ -18,7 +18,7 @@ namespace TORCHAIN.Components.DarknetGallery
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
         [BindProperty]
-        public DarknetGalleryEntity Media { get; set; }
+        public DarknetGalleryEntity? Media { get; set; }
         public DarknetGalleryEntity Image { get; set; } = new DarknetGalleryEntity();
         public IEnumerable<DarknetGalleryEntity>? Gallery { get; set; }
         protected bool Fail = true;
@@ -32,8 +32,10 @@ namespace TORCHAIN.Components.DarknetGallery
         {
             
             selectedFile = input.File;
+            int dotIndex = selectedFile.Name.IndexOf('.');
+            var extension = selectedFile.Name.Substring(dotIndex);
             StateHasChanged();
-            var path = Path.Combine(_environment!.ContentRootPath,"wwwroot/gallery",selectedFile.Name);
+            var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", $"{Guid.NewGuid().ToString()}{extension}");
             await using FileStream fs = new(path, FileMode.Create);
             await selectedFile.OpenReadStream().CopyToAsync(fs);
 
