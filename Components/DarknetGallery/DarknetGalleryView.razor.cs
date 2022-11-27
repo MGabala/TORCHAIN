@@ -32,18 +32,19 @@ namespace TORCHAIN.Components.DarknetGallery
 
         //Upload file
         private IBrowserFile selectedFile = null!;
-        private async void OnInputFileChange(InputFileChangeEventArgs input)
+        private void OnInputFileChange(InputFileChangeEventArgs input)
         {
             selectedFile = input.File;
+        }
+        private async Task ValidRequest()
+        {
+            
             var anonymizedFileName = $"{Guid.NewGuid().ToString()}{selectedFile.Name.Substring(selectedFile.Name.IndexOf('.'))}";
             var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", anonymizedFileName);
             await using FileStream fs = new(path, FileMode.Create);
             await selectedFile.OpenReadStream().CopyToAsync(fs);
             await _repository!.AddImage(anonymizedFileName, DateTime.Now, false);
-        }
-        private async Task ValidRequest()
-        {
-
+            Gallery = await _repository!.GetAllImages();
         }
         private async Task InvalidRequest()
         {
