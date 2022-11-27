@@ -24,18 +24,15 @@ namespace TORCHAIN.Components.DarknetGallery
         protected bool Fail = true;
         protected bool Success = false;
         protected string Status = string.Empty;
-       
+
 
         //Upload file
-        private IBrowserFile selectedFile;
+        private IBrowserFile selectedFile = null!;
         private async void OnInputFileChange(InputFileChangeEventArgs input)
         {
-            
             selectedFile = input.File;
-            int dotIndex = selectedFile.Name.IndexOf('.');
-            var extension = selectedFile.Name.Substring(dotIndex);
             StateHasChanged();
-            var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", $"{Guid.NewGuid().ToString()}{extension}");
+            var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", $"{Guid.NewGuid().ToString()}{selectedFile.Name.Substring(selectedFile.Name.IndexOf('.'))}");
             await using FileStream fs = new(path, FileMode.Create);
             await selectedFile.OpenReadStream().CopyToAsync(fs);
 
