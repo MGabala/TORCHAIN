@@ -5,36 +5,55 @@
             <div class="card-header">
                <div class="row">
                    <div class="col" style="text-align:center; font-weight:bold;">Post</div>
-                        <div class="col" style="text-align:center; font-weight:bold;">Most popular comments</div>
+                       @* <div class="col" style="text-align:center; font-weight:bold;">Most popular comments</div>*@
                </div>
             </div>
 <div class="row">
         <div class="col">
             <div class="card-body">
-                      <div class="card-text">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-text">
                         <p><b>Title: </b> @post.Title</p>
                         <p> <b>Description: </b> @post.Description</p>
                         <p> <b>Nick: </b> @post.Author</p>
                         <p> <b>Category: </b> @post.Category</p>
                         <p> <b>Created: </b> @post.CreationTime</p>
                       </div>
+                    </div>
+                            <div class="col" style="padding:15px;">
+                                <div class="card">
+                                    <div class="card-header">Newest comments</div>
+                                    <div class="card-body">
+                                        @foreach (var comment in Comments!.Take(3))
+                                        {
+
+                                            <div class="well" style="background-color:lightgray;"><p style="padding:3px;">@comment.CommentDescription</p></div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                </div>
                         <form method="post">
                                 <EditForm Model="@Comment" OnValidSubmit="@OnValidComment" OnInvalidSubmit="@OnInvalidComment">
                                     <DataAnnotationsValidator />
                                     <ValidationSummary />
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                         <p> <InputText type="text" class="form-control" placeholder="Your comment" id="comment" @bind-Value="@Comment.CommentDescription"></InputText></p>
                                             <ValidationMessage For="@(()=>Comment.CommentDescription)" />
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-2">
                                         <p> <InputText type="text" class="form-control" placeholder="Your nick" id="name" @bind-Value="@Comment.CommentAuthor"></InputText></p>
                                             <ValidationMessage For="@(()=>Comment.CommentAuthor)" />
                                         </div>
+                                        <div class="col-md-3">
+                                             <p><button type="submit" class="btn btn-success">Add comment</button></p>
+                                        </div>
                                     </div>
 
-                                    <p><button type="submit" class="btn btn-success">Add comment</button></p>
+                                   
                                 </EditForm>
                         </form>
              
@@ -67,13 +86,6 @@
                         <!-- Modal -->
             </div>
         </div>
-        <div class="col" style="padding:30px;">
-                    @foreach(var comment in Comments!)
-                    {
-
-                        <div class="well" style="background-color:lightgray;"><p style="padding:3px;">@comment.CommentDescription</p></div>
-                    }
-                </div>
 
                 
 </div>
