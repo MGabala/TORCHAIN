@@ -35,7 +35,6 @@ namespace TORCHAIN.Components.DarknetGallery
         }
         private async Task ValidRequest()
         {
-           
             await _repository!.AddImage(selectedFile);
             Gallery = await _repository!.GetAllImages();
         }

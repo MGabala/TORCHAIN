@@ -19,7 +19,7 @@
     <div class="card-header">
         <center><b>Dark Net gallery</b></center>
     </div>
-    <div class="card-body">
+    <div class="card-body">            <center>
         @if (Gallery!.Count() == 0)
         {
             <center><p class="card-body"><h1>Empty</h1></p></center>
@@ -27,9 +27,12 @@
         else
             @foreach (var item in Gallery!)
             {
-                <a target="_blank" href="/gallery/@item.ImageFileName">
-                    <img src="/gallery/@item.ImageFileName" width="400" height="400">
-                </a>
+
+                    <a target="_blank" href="/gallery/@item.ImageFileName">
+                        <img src="/gallery/@item.ImageFileName" class="responsive">
+                    </a>
+           
             }
+        </center>
     </div><br />
 </div>
