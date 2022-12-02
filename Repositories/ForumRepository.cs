@@ -119,10 +119,11 @@ namespace TORCHAIN.Repositories
         #region Gallery
         public async Task AddImage(IBrowserFile selectedFile)
         {
+            long maxallowedsize = 1024*3000;
             var anonymizedFileName = $"{Guid.NewGuid().ToString()}{selectedFile.Name.Substring(selectedFile.Name.IndexOf('.'))}";
             var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", anonymizedFileName);
             await using FileStream fs = new(path, FileMode.Create);
-            await selectedFile.OpenReadStream().CopyToAsync(fs);
+            await selectedFile.OpenReadStream(maxallowedsize).CopyToAsync(fs);
             using var factory = _contextFactory.CreateDbContext();
             await factory.DarknetGallery.AddAsync(new DarknetGalleryEntity
             {
