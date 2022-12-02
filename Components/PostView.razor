@@ -21,14 +21,13 @@
                         <p> <b>Created: </b> @post.CreationTime</p>
                       </div>
                     </div>
-                            <div class="col" style="padding:15px;">
+                            <div class="col" style="padding:5px;">
                                 <div class="card">
                                     <div class="card-header">Newest comments</div>
                                     <div class="card-body">
                                         @foreach (var comment in Comments!.Take(3))
                                         {
-
-                                            <div class="well" style="background-color:lightgray;"><p style="padding:3px;">@comment.CommentDescription</p></div>
+                                            <p><li class="list-group-item list-group-item-success">@comment.CommentDescription </li></p>
                                         }
                                     </div>
                                 </div>
@@ -74,7 +73,8 @@
                                     <div class="modal-body">
                                         @foreach(var comment in Comments!)
                                         {
-                                            <p>@comment.CommentDescription</p>
+                                         <hr><li class="list-group-item list-group-item-success"><b>Comment: </b>@comment.CommentDescription <b> <br>Author: </b>@comment.CommentAuthor <b>Creation Time: </b>@comment.CreationTime<br /></li>
+
                                         }
                                     </div>
                                     <div class="modal-footer">
