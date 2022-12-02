@@ -1,4 +1,6 @@
-﻿namespace TORCHAIN.Repositories
+﻿using Microsoft.AspNetCore.Components.Forms;
+
+namespace TORCHAIN.Repositories
 {
     public interface IForumRepository
     {
@@ -24,7 +26,7 @@
         #endregion
 
         #region Gallery
-        public Task AddImage(string name, DateTime creationTime, bool isVerified);
+        public Task AddImage(IBrowserFile selectedFile);
         public Task<IEnumerable<DarknetGalleryEntity>> GetAllImages();
         #endregion
     }

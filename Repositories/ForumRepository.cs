@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System;
+
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 
 namespace TORCHAIN.Repositories
@@ -7,10 +10,12 @@ namespace TORCHAIN.Repositories
     {
         private readonly IDbContextFactory<MainDatabase> _contextFactory;
         private readonly MainDatabase _context;
-        public ForumRepository(IDbContextFactory<MainDatabase> contextFactory, MainDatabase context)
+        private IWebHostEnvironment? _environment { get; set; }
+        public ForumRepository(IDbContextFactory<MainDatabase> contextFactory, MainDatabase context, IWebHostEnvironment environment)
         {
             _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _environment = environment ?? throw new ArgumentNullException(nameof(environment));
         }
 
         #region Categories
@@ -112,12 +117,16 @@ namespace TORCHAIN.Repositories
         #endregion
 
         #region Gallery
-        public async Task AddImage(string name, DateTime creationTime, bool isVerified)
+        public async Task AddImage(IBrowserFile selectedFile)
         {
+            var anonymizedFileName = $"{Guid.NewGuid().ToString()}{selectedFile.Name.Substring(selectedFile.Name.IndexOf('.'))}";
+            var path = Path.Combine(_environment!.ContentRootPath, "wwwroot/gallery", anonymizedFileName);
+            await using FileStream fs = new(path, FileMode.Create);
+            await selectedFile.OpenReadStream().CopyToAsync(fs);
             using var factory = _contextFactory.CreateDbContext();
             await factory.DarknetGallery.AddAsync(new DarknetGalleryEntity
             {
-                ImageFileName = name,
+                ImageFileName = anonymizedFileName,
                 CreationTime = DateTime.Now,
                 IsVerified = false
             });
