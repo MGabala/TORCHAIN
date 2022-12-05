@@ -67,3 +67,11 @@ a, .btn-link {
     width: 30%;
     height: auto;
 }
+.accordion-button:not(.collapsed){
+    color:black;
+    background-color:white;
+}
+.accordion-button:focus {
+    border-color: white;
+    box-shadow: none;
+}
