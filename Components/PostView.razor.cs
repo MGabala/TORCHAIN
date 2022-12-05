@@ -16,6 +16,7 @@ namespace TORCHAIN.Components
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
         public PostEntity Post { get; set; } = new PostEntity();
+       
         public CommentEntity Comment { get; set; } = new CommentEntity();
         public IEnumerable<PostEntity>? Posts { get; set; }
         public IEnumerable<CommentEntity>? Comments { get; set; }
@@ -30,9 +31,9 @@ namespace TORCHAIN.Components
         protected bool Success = false;
         protected string Status = string.Empty;
 
-        private async Task OnValidComment()
+        private async Task OnValidComment(int id)
         {
-           await _repository!.AddComment(Comment.CommentDescription,Comment.CommentAuthor,1,false,DateTime.Now);
+           await _repository!.AddComment(Comment.CommentDescription,Comment.CommentAuthor,id,false,DateTime.Now);
            Comments = await _repository!.GetAllComments();
         }
         private async Task OnInvalidComment()
