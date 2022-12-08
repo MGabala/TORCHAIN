@@ -8,7 +8,7 @@ namespace TORCHAIN.Repositories
         public Task AddCategory(string category, bool isverified);
         public Task CheckCategory(CategoryEntity category);
         public Task DeleteCategory(int id);
-        public Task<IEnumerable<CategoryEntity>> GetAllCategories();
+        public Task<IEnumerable<CategoryEntity>> GetAllCategories(bool isVerified);
         #endregion
 
         #region Posts
@@ -27,7 +27,7 @@ namespace TORCHAIN.Repositories
 
         #region Gallery
         public Task AddImage(IBrowserFile selectedFile);
-        public Task<IEnumerable<DarknetGalleryEntity>> GetAllImages();
+        public Task<IEnumerable<DarknetGalleryEntity>> GetAllImages(bool isVerified);
         #endregion
     }
 }

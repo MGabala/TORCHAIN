@@ -14,10 +14,14 @@ namespace TORCHAIN.Pages
 
         public IEnumerable<PostEntity>? Posts { get; set; }
         public IEnumerable<CommentEntity>? Comments { get; set; }
+        public IEnumerable<CategoryEntity>? Categories { get; set; }
+        public IEnumerable<DarknetGalleryEntity>? Gallery { get; set; }
         protected async override Task OnInitializedAsync()
         {
             Posts = await _repository!.GetAllPosts();
             Comments = await _repository!.GetAllComments();
+            Categories = await _repository!.GetAllCategories(isVerified: false);
+            Gallery = await _repository!.GetAllImages(isVerified: false);
         }
     }
 }

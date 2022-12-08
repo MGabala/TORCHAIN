@@ -78,3 +78,7 @@ a, .btn-link {
 .accordion-button {
     background-color: #d1e7dd;
 }
+.admin-responsive {
+    width: 20%;
+    height: auto;
+}

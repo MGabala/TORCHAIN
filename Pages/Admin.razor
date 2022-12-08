@@ -96,19 +96,65 @@
 
 <div class="collapse" id="categoriesCollapse">
     <div class="card card-body">
-        Categories
+        @foreach (var category in Categories!)
+        {
+                <p>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col" style="text-align:center; font-weight:bold;">Not approved category</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="card-text">
+                                                <p><b>Id: </b> @category.Id</p>
+                                                <p> <b>Category: </b> @category.Category</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </p>
+        }   
     </div>
 </div>
 
 <div class="collapse" id="mediaCollapse">
     <div class="card card-body">
-        Media
+        <div class="card">
+    <div class="card-header">
+        <center><b>Not approved images</b></center>
+    </div>
+    <div class="card-body">            <center>
+        @if (Gallery!.Count() == 0)
+        {
+            <center><p class="card-body"><h1>Empty</h1></p></center>
+        }
+        else
+            @foreach (var item in Gallery!)
+            {
+                <div class="card">
+                   
+                    <div class="card-body">
+                            <a target="_blank" href="/gallery/@item.ImageFileName">
+                                <img src="/gallery/@item.ImageFileName" class="responsive">
+                            </a>
+                    </div>
+                    </div>
+            }
+        </center>
+    </div><br />
+</div>
     </div>
 </div>
-
-
-
-
-
-
-

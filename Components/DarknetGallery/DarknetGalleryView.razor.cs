@@ -24,7 +24,7 @@ namespace TORCHAIN.Components.DarknetGallery
 
         protected async override Task OnInitializedAsync()
         {
-            Gallery = await _repository!.GetAllImages();
+            Gallery = await _repository!.GetAllImages(isVerified: true);
         }
 
         //Upload file
@@ -36,7 +36,7 @@ namespace TORCHAIN.Components.DarknetGallery
         private async Task ValidRequest()
         {
             await _repository!.AddImage(selectedFile);
-            Gallery = await _repository!.GetAllImages();
+            Gallery = await _repository!.GetAllImages(isVerified: true);
         }
         private async Task InvalidRequest()
         {

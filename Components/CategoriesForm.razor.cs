@@ -26,7 +26,7 @@ namespace TORCHAIN.Components
 
         protected async override Task OnInitializedAsync()
         {
-            Categories = await _repository!.GetAllCategories();
+            Categories = await _repository!.GetAllCategories(isVerified: true);
         }
         #region AddNewCategory
         protected bool Fail = true;
@@ -38,7 +38,7 @@ namespace TORCHAIN.Components
             await _repository!.AddCategory(category: NewCategory.Category!,isverified: false);
             Status = "alert-success";
             Success = true;
-            Categories = await _repository!.GetAllCategories();
+            Categories = await _repository!.GetAllCategories(isVerified: true);
             
         }
         private async Task Invalid()

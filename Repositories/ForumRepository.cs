@@ -48,9 +48,9 @@ namespace TORCHAIN.Repositories
         }
 #pragma warning restore CS8634
 
-        public async Task<IEnumerable<CategoryEntity>> GetAllCategories()
+        public async Task<IEnumerable<CategoryEntity>> GetAllCategories(bool isVerified)
         {
-           return await _context.Categories.OrderBy(x=>x.Id).ToListAsync();
+           return await _context.Categories.OrderBy(x=>x.Id).Where(x=>x.IsVerified == isVerified).ToListAsync();
         }
 
         #endregion
@@ -134,10 +134,10 @@ namespace TORCHAIN.Repositories
             await factory.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<DarknetGalleryEntity>> GetAllImages()
+        public async Task<IEnumerable<DarknetGalleryEntity>> GetAllImages(bool isVerified)
         {
             using var factory = _contextFactory.CreateDbContext();
-            return await factory.DarknetGallery.OrderBy(x=>x.Id).ToListAsync();
+            return await factory.DarknetGallery.OrderBy(x=>x.Id).Where(x=>x.IsVerified == isVerified).ToListAsync();
         }
         #endregion
     }

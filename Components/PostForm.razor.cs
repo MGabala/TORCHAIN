@@ -20,7 +20,7 @@ namespace TORCHAIN.Components
 
         protected async override Task OnInitializedAsync()
         {
-            Categories = await _repository!.GetAllCategories();
+            Categories = await _repository!.GetAllCategories(isVerified: true);
         }
 
         #region AddNewPost
