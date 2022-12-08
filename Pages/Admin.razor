@@ -1,1 +1,81 @@
 ﻿@page "/admin"
+
+<center><h1>Admin approval page</h1></center>
+
+
+<p>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#postCollapse" aria-expanded="false" aria-controls="collapseExample">
+        Posts
+    </button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse" aria-expanded="false" aria-controls="collapseExample">
+       Comments
+    </button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#categoriesCollapse" aria-expanded="false" aria-controls="collapseExample">
+       Categories
+    </button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#mediaCollapse" aria-expanded="false" aria-controls="collapseExample">
+        Media
+    </button>
+</p>
+<div class="collapse" id="postCollapse">
+    <div class="card card-body">
+        Posts
+    </div>
+</div>
+
+<div class="collapse" id="commentsCollapse">
+    <div class="card card-body">
+        Comments
+    </div>
+</div>
+
+<div class="collapse" id="categoriesCollapse">
+    <div class="card card-body">
+        Categories
+    </div>
+</div>
+
+<div class="collapse" id="mediaCollapse">
+    <div class="card card-body">
+        Media
+    </div>
+</div>
+
+
+
+
+
+
+
+@foreach(var post in Posts!.Where(x=>x.IsVerified == false)){
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col" style="text-align:center; font-weight:bold;">Post</div>
+                    @* <div class="col" style="text-align:center; font-weight:bold;">Most popular comments</div>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-text">
+                                    <p><b>Title: </b> @post.Title</p>
+                                    <p> <b>Description: </b> @post.Description</p>
+                                    <p> <b>Nick: </b> @post.Author</p>
+                                    <p> <b>Category: </b> @post.Category</p>
+                                    <p> <b>Created: </b> @post.CreationTime</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+}
