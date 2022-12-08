@@ -13,9 +13,11 @@ namespace TORCHAIN.Pages
         public NavigationManager? NavigationManager { get; set; }
 
         public IEnumerable<PostEntity>? Posts { get; set; }
+        public IEnumerable<CommentEntity>? Comments { get; set; }
         protected async override Task OnInitializedAsync()
         {
             Posts = await _repository!.GetAllPosts();
+            Comments = await _repository!.GetAllComments();
         }
     }
 }

@@ -19,13 +19,78 @@
 </p>
 <div class="collapse" id="postCollapse">
     <div class="card card-body">
-        Posts
+        @foreach (var post in Posts!.Where(x => x.IsVerified == false))
+        {
+            <p>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col" style="text-align:center; font-weight:bold;">Not approved posts</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card-text">
+                                                <p><b>Title: </b> @post.Title</p>
+                                                <p> <b>Description: </b> @post.Description</p>
+                                                <p> <b>Nick: </b> @post.Author</p>
+                                                <p> <b>Category: </b> @post.Category</p>
+                                                <p> <b>Created: </b> @post.CreationTime</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </p>
+        }
     </div>
 </div>
 
 <div class="collapse" id="commentsCollapse">
     <div class="card card-body">
-        Comments
+        @foreach (var comment in Comments!.Where(x=>x.IsVerified == false))
+        {
+            <p>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col" style="text-align:center; font-weight:bold;">Not approved comment</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card-text">
+                                                <p><b>Comment: </b> @comment.CommentDescription</p>
+                                                <p> <b>Author: </b> @comment.CommentAuthor</p>
+                                                <p> <b>Creation time: </b> @comment.CreationTime</p>
+                                                <p> <b>Post ID: </b> @comment.PostId</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </p>
+        }   
     </div>
 </div>
 
@@ -47,35 +112,3 @@
 
 
 
-@foreach(var post in Posts!.Where(x=>x.IsVerified == false)){
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col" style="text-align:center; font-weight:bold;">Post</div>
-                    @* <div class="col" style="text-align:center; font-weight:bold;">Most popular comments</div>*@
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-text">
-                                    <p><b>Title: </b> @post.Title</p>
-                                    <p> <b>Description: </b> @post.Description</p>
-                                    <p> <b>Nick: </b> @post.Author</p>
-                                    <p> <b>Category: </b> @post.Category</p>
-                                    <p> <b>Created: </b> @post.CreationTime</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-        </div>
-    </div>
-}
