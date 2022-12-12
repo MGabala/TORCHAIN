@@ -142,50 +142,74 @@ namespace TORCHAIN.Repositories
         #endregion
 
         #region Admin
-        public async Task Accept(int id,Type item)
+        public async Task Accept(int id,Type type)
         {
-            if (item == typeof(PostEntity))
+            if (type == typeof(PostEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
-                
-            }
-            if (item == typeof(CommentEntity))
-            {
-                using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.Posts.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = true;
+                await factory.SaveChangesAsync();
 
             }
-            if (item == typeof(CategoryEntity))
+            if (type == typeof(CommentEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.Comments.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = true;
+                await factory.SaveChangesAsync();
 
             }
-            if (item == typeof(DarknetGalleryEntity))
+            if (type == typeof(CategoryEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.Categories.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = true;
+                await factory.SaveChangesAsync();
+
+            }
+            if (type == typeof(DarknetGalleryEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.DarknetGallery.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = true;
+                await factory.SaveChangesAsync();
 
             }
         }
 
-        public async Task Deny(int id,Type item)
+        public async Task Deny(int id,Type type)
         {
-            if (item == typeof(PostEntity))
+            if (type == typeof(PostEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.Posts.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = false;
+                await factory.SaveChangesAsync();
 
             }
-            if (item == typeof(CommentEntity))
+            if (type == typeof(CommentEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.Comments.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = false;
+                await factory.SaveChangesAsync();
 
             }
-            if (item == typeof(CategoryEntity))
+            if (type == typeof(CategoryEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.Categories.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = false;
+                await factory.SaveChangesAsync();
 
             }
-            if (item == typeof(DarknetGalleryEntity))
+            if (type == typeof(DarknetGalleryEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
+                var post = await factory.DarknetGallery.SingleOrDefaultAsync(x => x.Id == id);
+                post!.IsVerified = false;
+                await factory.SaveChangesAsync();
 
             }
         }
