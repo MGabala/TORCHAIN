@@ -44,8 +44,8 @@
                                         </div>
                                     </div>
                                     <EditForm Model="@Post" style="text-align:center;">
-                                        <button type="button" class="btn btn-success" @onclick="@(() => AcceptPost(post.Id))">Accept</button>
-                                        <button type="button" class="btn btn-danger" @onclick="@(() => DenyPost(post.Id))">Reject</button>
+                                        <button type="button" class="btn btn-success" @onclick="@(() => Accept(post.Id, "PostEntity"))">Accept</button>
+                                        <button type="button" class="btn btn-danger" @onclick="@(() => Deny(post.Id, "PostEntity"))">Reject</button>
                                     </EditForm>
                                 </div>
                             </div>
@@ -88,8 +88,8 @@
                                         </div>
                                     </div>
                                     <EditForm Model="@Comment" style="text-align:center;">
-                                        <button type="button" class="btn btn-success" @onclick="@(() => AcceptComment(comment.Id))">Accept</button>
-                                        <button type="button" class="btn btn-danger" @onclick="@(() => DenyComment(comment.Id))">Reject</button>
+                                        <button type="button" class="btn btn-success" @onclick="@(() => Accept(comment.Id))">Accept</button>
+                                        <button type="button" class="btn btn-danger" @onclick="@(() => Deny(comment.Id))">Reject</button>
                                     </EditForm>
                                 </div>
                             </div>
@@ -128,8 +128,8 @@
                                             </div>
                                         </div>
                                     <EditForm Model="@Category" style="text-align:center;">
-                                        <button type="button" class="btn btn-success" @onclick="@(() => AcceptCategory(category.Id))">Accept</button>
-                                        <button type="button" class="btn btn-danger" @onclick="@(() => DenyCategory(category.Id))">Reject</button>
+                                        <button type="button" class="btn btn-success" @onclick="@(() => Accept(category.Id))">Accept</button>
+                                        <button type="button" class="btn btn-danger" @onclick="@(() => Deny(category.Id))">Reject</button>
                                     </EditForm>
                                     </div>
                                 </div>
@@ -166,8 +166,8 @@
                                         <img src="/gallery/@item.ImageFileName" class="responsive">
                                     </a><br/>
                                     <EditForm Model="@GalleryItem" style="text-align:center;">
-                                       <button type="button" class="btn btn-success" @onclick="@(() => AcceptGalleryItem(item.Id))">Accept</button>
-                                       <button type="button" class="btn btn-danger" @onclick="@(() => DenyGalleryItem(item.Id))">Reject</button>
+                                       <button type="button" class="btn btn-success" @onclick="@(() => Accept(item.Id))">Accept</button>
+                                       <button type="button" class="btn btn-danger" @onclick="@(() => Deny(item.Id))">Reject</button>
                                     </EditForm>
                                 </div>
                             </div>

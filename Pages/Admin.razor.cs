@@ -22,40 +22,16 @@ namespace TORCHAIN.Pages
         public DarknetGalleryEntity GalleryItem { get; set; } = new DarknetGalleryEntity();
         protected async override Task OnInitializedAsync()
         {
-            Posts = await _repository!.GetAllPosts(isVerified: true);
-            Comments = await _repository!.GetAllComments(isVerified: true);
+            Posts = await _repository!.GetAllPosts(isVerified: false);
+            Comments = await _repository!.GetAllComments(isVerified: false);
             Categories = await _repository!.GetAllCategories(isVerified: false);
             Gallery = await _repository!.GetAllImages(isVerified: false);
         }
-        private async Task AcceptPost(int id)
-        {
-          
-        }
-        private async Task DenyPost(int id)
+        private async Task Accept(int id, string type)
         {
 
         }
-        private async Task AcceptComment(int id)
-        {
-            
-        }
-        private async Task DenyComment(int id)
-        {
-
-        }
-        private async Task AcceptCategory(int id)
-        {
-
-        }
-        private async Task DenyCategory(int id)
-        {
-            
-        }
-        private async Task AcceptGalleryItem(int id)
-        {
-
-        }
-        private async Task DenyGalleryItem(int id)
+        private async Task Deny(int id, string type)
         {
 
         }
