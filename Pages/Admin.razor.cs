@@ -29,7 +29,7 @@ namespace TORCHAIN.Pages
         }
         private async Task Accept(int id, Type type)
         {
-
+            await _repository!.Accept(id, type);
         }
         private async Task Deny(int id, Type type)
         {

@@ -30,5 +30,11 @@ namespace TORCHAIN.Repositories
         public Task AddImage(IBrowserFile selectedFile);
         public Task<IEnumerable<DarknetGalleryEntity>> GetAllImages(bool isVerified);
         #endregion
+
+        #region Admin
+        public Task Accept(int id,Type item);
+        public Task Deny(int id,Type item);
+        
+        #endregion
     }
 }

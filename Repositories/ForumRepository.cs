@@ -140,5 +140,55 @@ namespace TORCHAIN.Repositories
             return await factory.DarknetGallery.OrderBy(x=>x.Id).Where(x=>x.IsVerified == isVerified).ToListAsync();
         }
         #endregion
+
+        #region Admin
+        public async Task Accept(int id,Type item)
+        {
+            if (item == typeof(PostEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+                
+            }
+            if (item == typeof(CommentEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+
+            }
+            if (item == typeof(CategoryEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+
+            }
+            if (item == typeof(DarknetGalleryEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+
+            }
+        }
+
+        public async Task Deny(int id,Type item)
+        {
+            if (item == typeof(PostEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+
+            }
+            if (item == typeof(CommentEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+
+            }
+            if (item == typeof(CategoryEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+
+            }
+            if (item == typeof(DarknetGalleryEntity))
+            {
+                using var factory = _contextFactory.CreateDbContext();
+
+            }
+        }
+        #endregion
     }
 }
