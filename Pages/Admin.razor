@@ -87,6 +87,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <EditForm Model="@Comment" style="text-align:center;">
+                                        <button type="button" class="btn btn-success" @onclick="@(() => AcceptComment(comment.Id))">Accept</button>
+                                        <button type="button" class="btn btn-danger" @onclick="@(() => DenyComment(comment.Id))">Reject</button>
+                                    </EditForm>
                                 </div>
                             </div>
 
@@ -123,6 +127,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    <EditForm Model="@Category" style="text-align:center;">
+                                        <button type="button" class="btn btn-success" @onclick="@(() => AcceptCategory(category.Id))">Accept</button>
+                                        <button type="button" class="btn btn-danger" @onclick="@(() => DenyCategory(category.Id))">Reject</button>
+                                    </EditForm>
                                     </div>
                                 </div>
 
@@ -156,7 +164,11 @@
                                 <div class="card-body">
                                     <a target="_blank" href="/gallery/@item.ImageFileName">
                                         <img src="/gallery/@item.ImageFileName" class="responsive">
-                                    </a>
+                                    </a><br/>
+                                    <EditForm Model="@GalleryItem" style="text-align:center;">
+                                       <button type="button" class="btn btn-success" @onclick="@(() => AcceptGalleryItem(item.Id))">Accept</button>
+                                       <button type="button" class="btn btn-danger" @onclick="@(() => DenyGalleryItem(item.Id))">Reject</button>
+                                    </EditForm>
                                 </div>
                             </div>
                         }
