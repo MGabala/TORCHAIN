@@ -43,6 +43,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <EditForm Model="@Post" style="text-align:center;">
+                                        <button type="button" class="btn btn-success" @onclick="@(() => Accept(post.Id))">Accept</button>
+                                        <button type="button" class="btn btn-danger" @onclick="@(() => Deny(post.Id))">Reject</button>
+                                    </EditForm>
                                 </div>
                             </div>
 
@@ -51,7 +55,9 @@
 
                     </div>
                 </div>
+
             </p>
+
         }
     </div>
 </div>
@@ -133,28 +139,29 @@
 <div class="collapse" id="mediaCollapse">
     <div class="card card-body">
         <div class="card">
-    <div class="card-header">
-        <center><b>Not approved images</b></center>
-    </div>
-    <div class="card-body">            <center>
-        @if (Gallery!.Count() == 0)
-        {
-            <center><p class="card-body"><h1>Empty</h1></p></center>
-        }
-        else
-            @foreach (var item in Gallery!)
-            {
-                <div class="card">
-                   
-                    <div class="card-body">
-                            <a target="_blank" href="/gallery/@item.ImageFileName">
-                                <img src="/gallery/@item.ImageFileName" class="responsive">
-                            </a>
-                    </div>
-                    </div>
-            }
-        </center>
-    </div><br />
-</div>
+            <div class="card-header">
+                <center><b>Not approved images</b></center>
+            </div>
+            <div class="card-body">
+                <center>
+                    @if (Gallery!.Count() == 0)
+                    {
+                        <center><p class="card-body"><h1>Empty</h1></p></center>
+                    }
+                    else
+                        @foreach (var item in Gallery!)
+                        {
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <a target="_blank" href="/gallery/@item.ImageFileName">
+                                        <img src="/gallery/@item.ImageFileName" class="responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                </center>
+            </div><br />
+        </div>
     </div>
 </div>
