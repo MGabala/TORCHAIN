@@ -22,8 +22,8 @@ namespace TORCHAIN.Pages
         public DarknetGalleryEntity GalleryItem { get; set; } = new DarknetGalleryEntity();
         protected async override Task OnInitializedAsync()
         {
-            Posts = await _repository!.GetAllPosts();
-            Comments = await _repository!.GetAllComments();
+            Posts = await _repository!.GetAllPosts(isVerified: true);
+            Comments = await _repository!.GetAllComments(isVerified: true);
             Categories = await _repository!.GetAllCategories(isVerified: false);
             Gallery = await _repository!.GetAllImages(isVerified: false);
         }

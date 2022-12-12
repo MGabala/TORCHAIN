@@ -70,9 +70,9 @@ namespace TORCHAIN.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<PostEntity>> GetAllPosts()
+        public async Task<IEnumerable<PostEntity>> GetAllPosts(bool isVerified)
         {
-            return await _context.Posts.OrderByDescending(x => x.Id).ToListAsync();
+            return await _context.Posts.OrderByDescending(x => x.Id).Where(x => x.IsVerified == isVerified).ToListAsync();
         }
 
         #endregion
@@ -90,17 +90,17 @@ namespace TORCHAIN.Repositories
             });
            await _context.SaveChangesAsync();
         }
-        public async Task<IEnumerable<CommentEntity>> GetAllComments()
+        public async Task<IEnumerable<CommentEntity>> GetAllComments(bool isVerified)
         {
-            return await _context.Comments.OrderByDescending(x=>x.Id).ToListAsync();
+            return await _context.Comments.OrderByDescending(x=>x.Id).Where(x => x.IsVerified == isVerified).ToListAsync();
         }
         #endregion
 
         #region HiddenWiki
-        public async Task<IEnumerable<HiddenWikiEntity>> GetAllWebsites()
+        public async Task<IEnumerable<HiddenWikiEntity>> GetAllWebsites(bool isVerified)
         {
             using var factory = _contextFactory.CreateDbContext();
-            return await factory.Websites.OrderBy(x => x.Id).ToListAsync();
+            return await factory.Websites.OrderBy(x => x.Id).Where(x => x.IsVerified == isVerified).ToListAsync();
         }
         public async Task AddWebsite(string www, string description, bool isVerified, DateTime creationtime)
         {

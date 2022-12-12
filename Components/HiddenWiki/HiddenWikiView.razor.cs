@@ -16,7 +16,7 @@ namespace TORCHAIN.Components.HiddenWiki
         protected string Status = string.Empty;
         protected async override Task OnInitializedAsync()
         {
-            Websites = await _repository!.GetAllWebsites();
+            Websites = await _repository!.GetAllWebsites(isVerified: true);
         }
         private async Task ValidRequest()
         {
