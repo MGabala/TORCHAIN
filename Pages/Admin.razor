@@ -44,8 +44,8 @@
                                         </div>
                                     </div>
                                     <EditForm Model="@Post" style="text-align:center;">
-                                        <button type="button" class="btn btn-success" @onclick="@(() => Accept(post.Id))">Accept</button>
-                                        <button type="button" class="btn btn-danger" @onclick="@(() => Deny(post.Id))">Reject</button>
+                                        <button type="button" class="btn btn-success" @onclick="@(() => AcceptPost(post.Id))">Accept</button>
+                                        <button type="button" class="btn btn-danger" @onclick="@(() => DenyPost(post.Id))">Reject</button>
                                     </EditForm>
                                 </div>
                             </div>
