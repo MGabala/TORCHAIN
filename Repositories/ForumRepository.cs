@@ -144,10 +144,11 @@ namespace TORCHAIN.Repositories
         #region Admin
         public async Task Accept(int id,Type type)
         {
+            
             if (type == typeof(PostEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
-                var post = await factory.Posts.SingleOrDefaultAsync(x => x.Id == id);
+                var post = await factory.Posts.SingleOrDefaultAsync( x => x.Id == id);
                 post!.IsVerified = true;
                 await factory.SaveChangesAsync();
 
@@ -180,38 +181,36 @@ namespace TORCHAIN.Repositories
 
         public async Task Deny(int id,Type type)
         {
+#pragma warning disable CS8634
             if (type == typeof(PostEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
-                var post = await factory.Posts.SingleOrDefaultAsync(x => x.Id == id);
-                post!.IsVerified = false;
+                var post = await factory.Posts.FirstOrDefaultAsync(x => x.Id == id);
+                factory!.Remove(post);
                 await factory.SaveChangesAsync();
-
             }
             if (type == typeof(CommentEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
-                var post = await factory.Comments.SingleOrDefaultAsync(x => x.Id == id);
-                post!.IsVerified = false;
+                var comment = await factory.Comments.FirstOrDefaultAsync(x => x.Id == id);
+                factory!.Remove(comment);
                 await factory.SaveChangesAsync();
-
             }
             if (type == typeof(CategoryEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
-                var post = await factory.Categories.SingleOrDefaultAsync(x => x.Id == id);
-                post!.IsVerified = false;
+                var category = await factory.Categories.FirstOrDefaultAsync(x => x.Id == id);
+                factory!.Remove(category);
                 await factory.SaveChangesAsync();
-
             }
             if (type == typeof(DarknetGalleryEntity))
             {
                 using var factory = _contextFactory.CreateDbContext();
-                var post = await factory.DarknetGallery.SingleOrDefaultAsync(x => x.Id == id);
-                post!.IsVerified = false;
+                var galleryItem = await factory.DarknetGallery.FirstOrDefaultAsync(x => x.Id == id);
+                factory!.Remove(galleryItem);
                 await factory.SaveChangesAsync();
-
             }
+#pragma warning restore CS8634
         }
         #endregion
     }

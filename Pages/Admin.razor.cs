@@ -30,10 +30,12 @@ namespace TORCHAIN.Pages
         private async Task Accept(int id, Type type)
         {
             await _repository!.Accept(id, type);
+            await InvokeAsync(() => OnInitializedAsync());
         }
         private async Task Deny(int id, Type type)
         {
-
+            await _repository!.Deny(id, type);
+            await InvokeAsync(() => OnInitializedAsync());
         }
     }
 }
