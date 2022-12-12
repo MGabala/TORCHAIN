@@ -27,11 +27,11 @@ namespace TORCHAIN.Pages
             Categories = await _repository!.GetAllCategories(isVerified: false);
             Gallery = await _repository!.GetAllImages(isVerified: false);
         }
-        private async Task Accept(int id, string type)
+        private async Task Accept(int id, Type type)
         {
 
         }
-        private async Task Deny(int id, string type)
+        private async Task Deny(int id, Type type)
         {
 
         }
