@@ -30,8 +30,6 @@ namespace TORCHAIN.Pages
                 var symbol = "BTCBUSD";
                 var market = new Market(_httpClient);
                 var result = await market.CurrentAveragePrice(symbol);
-                Console.WriteLine(result);
-                Console.WriteLine(JsonConvert.DeserializeObject(result));
                 BinancePrice? Token = JsonConvert.DeserializeObject<BinancePrice>(result);
                 Lista.Add(Token!.Price.ToString());
             }
