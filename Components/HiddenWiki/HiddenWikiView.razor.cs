@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+
 using TORCHAIN.Repositories;
 
 namespace TORCHAIN.Components.HiddenWiki
@@ -36,6 +38,7 @@ namespace TORCHAIN.Components.HiddenWiki
             Status = "alert-danger";
             Fail = false;
         }
+
 
     }
 }

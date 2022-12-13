@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 using Microsoft.AspNetCore.Components;
 using TORCHAIN.Repositories;
@@ -20,6 +21,7 @@ namespace TORCHAIN.Pages
         public CommentEntity Comment { get; set; } = new CommentEntity();
         public CategoryEntity Category { get; set; } = new CategoryEntity();
         public DarknetGalleryEntity GalleryItem { get; set; } = new DarknetGalleryEntity();
+
         protected async override Task OnInitializedAsync()
         {
             Posts = await _repository!.GetAllPosts(isVerified: false);
