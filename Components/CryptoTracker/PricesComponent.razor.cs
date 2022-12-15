@@ -9,21 +9,26 @@ namespace TORCHAIN.Components.CryptoTracker
     public partial class PricesComponent
     {
        private static HttpClient _httpClient = new HttpClient();
-        public Dictionary<string, string> Lista = new Dictionary<string, string>()
-        {
-            {"Binance","0" },
-            {"Zonda","0" },
-            {"Bitrue","0" }
-        };
         public string BinancePrice { get; set; } 
         public string ZondaPrice { get; set; } 
         public string BitruePrice { get; set; } 
         public string GatePrice { get; set; } 
-        public string KucoinPrice { get; set; } 
+        public string KucoinPrice { get; set; }
         protected async override Task OnInitializedAsync()
         {
-            await PriceCheck();
+
+            var timer = new System.Threading.Timer((_) =>
+            {
+
+                InvokeAsync(async () =>
+                {
+                    await PriceCheck();
+                    StateHasChanged();
+                    Console.WriteLine("Program works correctly.");
+                });
+            }, null, 0, 1000);
         }
+
         private async Task PriceCheck()
         {
             #region BinanceAPI
@@ -31,7 +36,7 @@ namespace TORCHAIN.Components.CryptoTracker
             {
                 using (_httpClient = new HttpClient())
                 {
-                    _httpClient.BaseAddress = new Uri("https://testnet.binance.vision");
+                    _httpClient.BaseAddress = new Uri("https://api.binance.com");
                     _httpClient.Timeout = new TimeSpan(0, 0, 5);
                     _httpClient.DefaultRequestHeaders.Clear();
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
@@ -39,9 +44,8 @@ namespace TORCHAIN.Components.CryptoTracker
                     _httpClient.DefaultRequestHeaders.Add("SecretKey", Environment.GetEnvironmentVariable("SECRETKEY"));
                     var symbol = "BTCBUSD";
                     var market = new Market(_httpClient);
-                    var result = await market.CurrentAveragePrice(symbol);
+                    var result = await market.SymbolPriceTicker(symbol);
                     BinancePrice? binancePrice = JsonConvert.DeserializeObject<BinancePrice>(result);
-                    Lista["Binance"] = binancePrice!.Price.ToString();
                     BinancePrice = binancePrice!.Price.ToString();
                 }
             }
@@ -61,9 +65,7 @@ namespace TORCHAIN.Components.CryptoTracker
                     var response = await _httpClient.GetAsync("/rest/trading/ticker/BTC-USDT");
                     response.EnsureSuccessStatusCode();
                     var body = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(body);
                     ZondaPrice? zondaPrice = JsonConvert.DeserializeObject<ZondaPrice>(body);
-                    Lista["Zonda"] = zondaPrice!.ticker.rate;
                     ZondaPrice = zondaPrice!.ticker.rate;
                 }
             }
@@ -84,7 +86,6 @@ namespace TORCHAIN.Components.CryptoTracker
                     var response = await _httpClient.GetAsync("/api/v1/ticker/price?symbol=btcusdt");
                     response.EnsureSuccessStatusCode();
                     var body = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(body);
                     BitruePrice? bitruePrice = JsonConvert.DeserializeObject<BitruePrice>(body);
                     BitruePrice = bitruePrice!.price;
                 }
@@ -106,7 +107,6 @@ namespace TORCHAIN.Components.CryptoTracker
                     var response = await _httpClient.GetAsync("/api/v4/spot/tickers?currency_pair=BTC_USDT");
                     response.EnsureSuccessStatusCode();
                     var body = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(body);
                     List<GatePrice>? gatePrice = JsonConvert.DeserializeObject<List<GatePrice>>(body);
                     GatePrice = gatePrice!.First().last;
                 }
@@ -128,7 +128,6 @@ namespace TORCHAIN.Components.CryptoTracker
                     var response = await _httpClient.GetAsync("/api/v1/market/orderbook/level1?symbol=BTC-USDT");
                     response.EnsureSuccessStatusCode();
                     var body = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(body);
                     KucoinPrice? kucoinPrice = JsonConvert.DeserializeObject<KucoinPrice>(body);
                     KucoinPrice = kucoinPrice!.data.price;
                 }
@@ -138,7 +137,7 @@ namespace TORCHAIN.Components.CryptoTracker
                 Console.WriteLine(exception.InnerException?.Message ?? exception.Message);
             }
             #endregion
-
+          
         }
     }
 }
