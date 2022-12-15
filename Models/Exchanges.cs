@@ -50,4 +50,11 @@ namespace TORCHAIN.Models
         public string previousRate { get; set; }
     }
     #endregion
+    #region Bitrue
+    public class BitruePrice
+    {
+        public string symbol { get; set; }
+        public string price { get; set; }
+    }
+    #endregion
 }
