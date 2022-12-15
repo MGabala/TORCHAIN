@@ -7,10 +7,11 @@
                 <div class="card">
                     <div class="card-header" style="text-align:center;">Binance</div>
                     <div class="card-body">
-                        @foreach (var item in Lista.Where(x=>x.Key == "Binance"))
+@*                        @foreach (var item in Lista.Where(x=>x.Key == "Binance"))
                         {
-                        <p style="text-align:center;">BTC price: @item.Value</p>
-                        }
+                        <p style="text-align:center;">BTC price: @item.Value</p> 
+                        }*@
+                    <input @bind-value="@BinancePrice" @onmousemove="PriceCheck" />
                     </div>
                 </div>
             </div>
@@ -18,10 +19,11 @@
                 <div class="card">
                     <div class="card-header" style="text-align:center;">Zonda</div>
                     <div class="card-body">
-                    @foreach (var item in Lista.Where(x => x.Key == "Zonda"))
+@*                    @foreach (var item in Lista.Where(x => x.Key == "Zonda"))
                     {
                         <p style="text-align:center;">BTC price: @item.Value</p>
-                    }
+                    }*@
+                    <input @bind-value="@ZondaPrice" @onmousemove="PriceCheck" />
                     </div>
                 </div>
             </div>
