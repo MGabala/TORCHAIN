@@ -18,6 +18,8 @@ namespace TORCHAIN.Components.CryptoTracker
         public string BinancePrice { get; set; } 
         public string ZondaPrice { get; set; } 
         public string BitruePrice { get; set; } 
+        public string GatePrice { get; set; } 
+        public string KucoinPrice { get; set; } 
         protected async override Task OnInitializedAsync()
         {
             await PriceCheck();
@@ -93,6 +95,49 @@ namespace TORCHAIN.Components.CryptoTracker
             }
             #endregion
 
+            #region Gate
+            try
+            {
+                using (_httpClient = new HttpClient())
+                {
+                    _httpClient.BaseAddress = new Uri("https://api.gateio.ws");
+                    _httpClient.Timeout = new TimeSpan(0, 0, 5);
+                    _httpClient.DefaultRequestHeaders.Clear();
+                    var response = await _httpClient.GetAsync("/api/v4/spot/tickers?currency_pair=BTC_USDT");
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
+                    List<GatePrice>? gatePrice = JsonConvert.DeserializeObject<List<GatePrice>>(body);
+                    GatePrice = gatePrice!.First().last;
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.InnerException?.Message ?? exception.Message);
+            }
+            #endregion
+
+            #region Kucoin
+            try
+            {
+                using (_httpClient = new HttpClient())
+                {
+                    _httpClient.BaseAddress = new Uri("https://api.kucoin.com");
+                    _httpClient.Timeout = new TimeSpan(0, 0, 5);
+                    _httpClient.DefaultRequestHeaders.Clear();
+                    var response = await _httpClient.GetAsync("/api/v1/market/orderbook/level1?symbol=BTC-USDT");
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
+                    KucoinPrice? kucoinPrice = JsonConvert.DeserializeObject<KucoinPrice>(body);
+                    KucoinPrice = kucoinPrice!.data.price;
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.InnerException?.Message ?? exception.Message);
+            }
+            #endregion
 
         }
     }

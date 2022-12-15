@@ -40,6 +40,7 @@
                     <div class="card">
                     <div class="card-header" style="text-align:center;">Gate</div>
                     <div class="card-body">
+                    <input @bind-value="@GatePrice" @onmousemove="PriceCheck" />
 
                     </div>
                 </div>
@@ -48,6 +49,8 @@
                 <div class="card">
                     <div class="card-header" style="text-align:center;">Kucoin</div>
                     <div class="card-body">
+                    <input @bind-value="@KucoinPrice" @onmousemove="PriceCheck" />
+
                     </div>
                 </div>
             </div>
