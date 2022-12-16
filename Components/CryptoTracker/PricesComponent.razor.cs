@@ -1,7 +1,14 @@
-﻿using Binance.Common;
+﻿using Binance.Client.Websocket.Client;
+using Binance.Client.Websocket.Subscriptions;
+using Binance.Client.Websocket.Websockets;
+using Binance.Client.Websocket;
+using Binance.Common;
 using Binance.Spot;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Net.WebSockets;
+using System.Threading;
+
 using TORCHAIN.Models;
 
 namespace TORCHAIN.Components.CryptoTracker
@@ -16,10 +23,9 @@ namespace TORCHAIN.Components.CryptoTracker
         public string KucoinPrice { get; set; }
         protected async override Task OnInitializedAsync()
         {
-
+            #region Basic
             var timer = new System.Threading.Timer((_) =>
             {
-
                 InvokeAsync(async () =>
                 {
                     await PriceCheck();
@@ -27,6 +33,7 @@ namespace TORCHAIN.Components.CryptoTracker
                     Console.WriteLine("Program works correctly.");
                 });
             }, null, 0, 1000);
+            #endregion
         }
 
         private async Task PriceCheck()
@@ -53,6 +60,29 @@ namespace TORCHAIN.Components.CryptoTracker
             {
                 Console.WriteLine(binanceException.InnerException?.Message ?? binanceException.Message);
             }
+            #region BinanceWebsocket
+            var exitEvent = new ManualResetEvent(false);
+            var url = BinanceValues.ApiWebsocketUrl;
+
+            using (var communicator = new BinanceWebsocketCommunicator(url))
+            {
+                using (var client = new BinanceWebsocketClient(communicator))
+                {
+                    client.Streams.TradesStream.Subscribe(response =>
+                    {
+                        var trade = response.Data;
+                        Console.WriteLine($"Trade executed [{trade.Symbol}] price: {trade.Price}");
+
+                    });
+
+                    client.SetSubscriptions(
+                        new TradeSubscription("btcusdt")
+                        );
+                    await communicator.Start();
+                    exitEvent.WaitOne(TimeSpan.FromSeconds(30));
+                }
+            }
+            #endregion
             #endregion
             #region Zonda
             try
