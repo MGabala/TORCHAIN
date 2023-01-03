@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Components\Chat\" />
     <Folder Include="Widgets\" />
-    <Folder Include="wwwroot\gallery\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -60,29 +60,29 @@ namespace TORCHAIN.Components.CryptoTracker
             {
                 Console.WriteLine(binanceException.InnerException?.Message ?? binanceException.Message);
             }
-            #region BinanceWebsocket
-            var exitEvent = new ManualResetEvent(false);
-            var url = BinanceValues.ApiWebsocketUrl;
+            //#region BinanceWebsocket
+            //var exitEvent = new ManualResetEvent(false);
+            //var url = BinanceValues.ApiWebsocketUrl;
 
-            using (var communicator = new BinanceWebsocketCommunicator(url))
-            {
-                using (var client = new BinanceWebsocketClient(communicator))
-                {
-                    client.Streams.TradesStream.Subscribe(response =>
-                    {
-                        var trade = response.Data;
-                        Console.WriteLine($"Trade executed [{trade.Symbol}] price: {trade.Price}");
+            //using (var communicator = new BinanceWebsocketCommunicator(url))
+            //{
+            //    using (var client = new BinanceWebsocketClient(communicator))
+            //    {
+            //        client.Streams.TradesStream.Subscribe(response =>
+            //        {
+            //            var trade = response.Data;
+            //            Console.WriteLine($"Trade executed [{trade.Symbol}] price: {trade.Price}");
 
-                    });
+            //        });
 
-                    client.SetSubscriptions(
-                        new TradeSubscription("btcusdt")
-                        );
-                    await communicator.Start();
-                    exitEvent.WaitOne(TimeSpan.FromSeconds(30));
-                }
-            }
-            #endregion
+            //        client.SetSubscriptions(
+            //            new TradeSubscription("btcusdt")
+            //            );
+            //        await communicator.Start();
+            //        exitEvent.WaitOne(TimeSpan.FromSeconds(30));
+            //    }
+            //}
+            //#endregion
             #endregion
             #region Zonda
             try
