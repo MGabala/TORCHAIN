@@ -7,9 +7,9 @@ namespace TORCHAIN.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required,MinLength(10),MaxLength(50)]
+        [Required,MinLength(3),MaxLength(50)]
         public string Title { get; set; } = null!;
-        [Required, MinLength(10), MaxLength(250)]
+        [Required, MinLength(3), MaxLength(250)]
         public string Description { get; set; } = null!;
         [Required, MinLength(3), MaxLength(15)]
         public string Author { get; set; } = null!;
