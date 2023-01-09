@@ -33,6 +33,8 @@ namespace TORCHAIN.Components
             await _repository!.AddPost(Post.Title, Post.Description, Post.Author, Post.Category, false, DateTime.Now);
             Status = "alert-success";
             Success = true;
+            Post = new();
+            StateHasChanged();
         }
         private async Task Invalid()
         {

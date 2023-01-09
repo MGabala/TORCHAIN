@@ -35,6 +35,7 @@ namespace TORCHAIN.Components
         {
            await _repository!.AddComment(Comment.CommentDescription,Comment.CommentAuthor,id,false,DateTime.Now);
            Comments = await _repository!.GetAllComments(isVerified: true);
+            Comment = new();
         }
         private async Task OnInvalidComment()
         {
