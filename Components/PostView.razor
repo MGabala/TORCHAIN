@@ -7,9 +7,9 @@
        
        @if(FilteredPosts.Count() > 0)
        {
-    @foreach(var item in FilteredPosts)
+    @foreach(var post in FilteredPosts)
     {
-        <div class="col">
+@*        <div class="col">
             <div class="card">
                 <div class="card-text">
                     <p><b>Title: </b> @item.Title</p>
@@ -19,6 +19,106 @@
                     <p> <b>Created: </b> @item.CreationTime</p>
                 </div>
             </div>
+        </div>*@
+        <div class="col-md-12">
+            <p>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col" style="text-align:center; font-weight:bold;">Post</div>
+                            @* <div class="col" style="text-align:center; font-weight:bold;">Most popular comments</div>*@
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card-text">
+                                            <p><b>Title: </b> @post.Title</p>
+                                            <p> <b>Description: </b> @post.Description</p>
+                                            <p> <b>Nick: </b> @post.Author</p>
+                                            <p> <b>Category: </b> @post.Category</p>
+                                            <p> <b>Created: </b> @post.CreationTime</p>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding:5px;">
+                                        <div class="accordion accordion-flush" style="border:none;" id="accordionFlushExample">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="flush-headingOne">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-@post.Id" aria-expanded="false" aria-controls="flush-@post.Id">
+                                                        Newest comments
+                                                    </button>
+                                                </h2>
+                                                <div id="flush-@post.Id" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                    <div class="accordion-body">
+                                                        @foreach (var comment in Comments!.Take(3))
+                                                        {
+                                                            <p><li class="list-group-item list-group-item-success">@comment.CommentDescription </li></p>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <EditForm Model="@Comment" OnValidSubmit="@(() => OnValidComment(post.Id))" OnInvalidSubmit="@OnInvalidComment">
+                                    <DataAnnotationsValidator />
+                                    <ValidationSummary />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p> <InputText type="text" class="form-control" placeholder="Your comment" id="comment" @bind-Value="@Comment.CommentDescription"></InputText></p>
+                                            <ValidationMessage For="@(()=>Comment.CommentDescription)" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p> <InputText type="text" class="form-control" placeholder="Your nick" id="name" @bind-Value="@Comment.CommentAuthor"></InputText></p>
+                                            <ValidationMessage For="@(()=>Comment.CommentAuthor)" />
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p><button type="submit" class="btn btn-success" name="id" value="@post.Id">Add comment</button></p>
+                                        </div>
+                                    </div>
+                                </EditForm>
+
+                                <!-- Modal -->
+                                <form method="get">
+                                    <div class="py-2">
+                                        <button type="button" data-bs-target="#Modal_@post.Id" name="Id" value="@post.Id" class="btn btn-primary" data-bs-toggle="modal">Show all comments</button>
+                                    </div>
+                                </form>
+                                <div class="modal fade" id="Modal_@post.Id" tabindex="-1" aria-hidden="true">
+
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @foreach (var comment in Comments!.Where(x => x.PostId == post.Id))
+                                                {
+                                                    <hr>
+
+                                                    <li class="list-group-item list-group-item-success"><b>Comment: </b>@comment.CommentDescription <b> <br>Author: </b>@comment.CommentAuthor <b>Creation Time: </b>@comment.CreationTime<br /></li>
+
+                                                }
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </p>
         </div>
     }
 }
