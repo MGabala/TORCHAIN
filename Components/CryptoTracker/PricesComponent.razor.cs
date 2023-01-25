@@ -21,6 +21,7 @@ namespace TORCHAIN.Components.CryptoTracker
         public string BitruePrice { get; set; } 
         public string GatePrice { get; set; } 
         public string KucoinPrice { get; set; }
+
         protected async override Task OnInitializedAsync()
         {
             #region Basic

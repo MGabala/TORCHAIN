@@ -21,11 +21,13 @@ namespace TORCHAIN.Components
         public IEnumerable<PostEntity>? Posts { get; set; }
         public IEnumerable<CommentEntity>? Comments { get; set; }
 
+
         protected async override Task OnInitializedAsync()
         {
              Posts = await _repository!.GetAllPosts(isVerified: true);
              Comments = await _repository!.GetAllComments(isVerified: true);
         }
+
         #region Comments
         protected bool Fail = true;
         protected bool Success = false;
@@ -33,16 +35,39 @@ namespace TORCHAIN.Components
 
         private async Task OnValidComment(int id)
         {
-           await _repository!.AddComment(Comment.CommentDescription,Comment.CommentAuthor,id,false,DateTime.Now);
+            await Task.Delay(0);
+
+            await _repository!.AddComment(Comment.CommentDescription,Comment.CommentAuthor,id,false,DateTime.Now);
            Comments = await _repository!.GetAllComments(isVerified: true);
             Comment = new();
         }
         private async Task OnInvalidComment()
         {
+            await Task.Delay(0);
             Status = "alert-danger";
             Fail = false;
         }
 
+        #endregion
+
+        #region SearchBox
+        public string SearchTerm { get; set; } = string.Empty;
+
+        public List<PostEntity> FilteredPosts = new List<PostEntity>();
+        public async Task FilterPosts()
+        {
+            await Task.Delay(0);
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                FilteredPosts = Posts
+                .Where(x => x.Title.ToLower().Contains(SearchTerm.ToLower())).ToList();
+            }
+            else
+            {
+                FilteredPosts = new();
+            }
+        }
         #endregion
     }
 }
