@@ -70,6 +70,9 @@ a, .btn-link {
 .responsive-logo {
     width: 100%;
     height: auto;
+/*    position: relative;
+    left: -3px;
+    top: -9px;*/
 }
 .accordion-button:not(.collapsed){
     color:black;
