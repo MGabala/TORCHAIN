@@ -30,9 +30,9 @@ namespace TORCHAIN.Components.CryptoTracker
                 {
                     await PriceCheck();
                     StateHasChanged();
-                    Console.WriteLine("Program works correctly.");
+                    
                 });
-            }, null, 0, 1000);
+            }, null, 0, 3000);
             #endregion
         }
 
