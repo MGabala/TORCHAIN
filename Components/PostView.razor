@@ -3,7 +3,8 @@
     <input class="form-control" @bind="SearchTerm" @bind:after="FilterPosts"
            @bind:event="oninput" placeholder="Search..." />
 </p>
-       
+
+
        
        @if(FilteredPosts.Count() > 0)
        {
@@ -64,7 +65,7 @@
                                 </div>
                                 <EditForm Model="@Comment" OnValidSubmit="@(() => OnValidComment(post.Id))" OnInvalidSubmit="@OnInvalidComment">
                                     <DataAnnotationsValidator />
-                                    <ValidationSummary />
+                                    <Microsoft.Asp.NetCore.Components.Forms.ValidationSummary />
                                     <div class="row">
                                         <div class="col-md-12">
                                             <p> <InputText type="text" class="form-control" placeholder="Your comment" id="comment" @bind-Value="@Comment.CommentDescription"></InputText></p>
@@ -170,7 +171,7 @@
                         </div>
                                 <EditForm Model="@Comment" OnValidSubmit="@(() => OnValidComment(post.Id))" OnInvalidSubmit="@OnInvalidComment">
                                             <DataAnnotationsValidator />
-                                            <ValidationSummary />
+                                            <Microsoft.Asp.NetCore.Components.Forms.ValidationSummary />
                                             <div class="row">
                                                 <div class="col-md-12">
                                                 <p> <InputText type="text" class="form-control" placeholder="Your comment" id="comment" @bind-Value="@Comment.CommentDescription"></InputText></p>

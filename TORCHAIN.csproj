@@ -14,6 +14,10 @@
   <ItemGroup>
     <PackageReference Include="Binance.Client.Websocket" Version="2.1.10" />
     <PackageReference Include="Binance.Spot" Version="2.0.0" />
+    <PackageReference Include="Blazored.Modal" Version="7.1.0" />
+    <PackageReference Include="Blazorise" Version="1.2.0-preview2" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="1.2.0-preview2" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.2.0-preview2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="0.1.0-alpha.22351.1" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
