@@ -43,6 +43,7 @@ namespace TORCHAIN.Components
         }
         private async Task Invalid()
         {
+            await Task.Delay(0);
             Status = "alert-danger";
             Fail = false;
         }
