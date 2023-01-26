@@ -5,17 +5,19 @@
     <div class="card-body">
         <EditForm Model="@Website" OnValidSubmit="@ValidRequest" OnInvalidSubmit="@InvalidRequest">
             <DataAnnotationsValidator />
-            <ValidationSummary />
+            <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
             @if (Success == true)
             {
                 <div class="alert @Status">
                     <p>Your entry must be reviewed by administrator.</p>
                 </div>
             }
-            <p><InputText name="title" class="form-control" placeholder="Website URL" @bind-Value="@Website.WWW"></InputText>
+            <p>
+                <Microsoft.AspNetCore.Components.Forms.InputText name="title" class="form-control" placeholder="Website URL" @bind-Value="@Website.WWW"></Microsoft.AspNetCore.Components.Forms.InputText>
                 <ValidationMessage For="@(()=>Website.WWW)" />
             </p>
-             <p><InputTextArea name="title" class="form-control" placeholder="Post description" @bind-Value="@Website.Description"></InputTextArea>
+            <p>
+                <Microsoft.AspNetCore.Components.Forms.InputTextArea name="title" class="form-control" placeholder="Post description" @bind-Value="@Website.Description"></Microsoft.AspNetCore.Components.Forms.InputTextArea>
                 <ValidationMessage For="@(()=>Website.Description)" />
             </p>
             <p><button type="submit" class="btn btn-success">Post</button></p>

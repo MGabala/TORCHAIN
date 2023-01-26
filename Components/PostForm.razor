@@ -5,7 +5,7 @@
             <div class="card-body">
                 <EditForm Model="@Post" OnValidSubmit="@AddPost" OnInvalidSubmit="@Invalid">
                 <DataAnnotationsValidator />
-                <ValidationSummary />
+                <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
                     @if(Success == true)
                     {
                         <div class="alert @Status">

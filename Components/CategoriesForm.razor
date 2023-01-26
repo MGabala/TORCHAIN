@@ -30,7 +30,7 @@
                 {
                     <div class="alert @Status">
                         <p>Fix errors and try again.</p>
-                        <ValidationSummary />
+                            <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
                     </div>
                 }
                 @if (Success == true)
@@ -41,7 +41,7 @@
 
 
                 }
-                <p><InputText id="categoryName" class="form-control" placeholder="No category you are interested? Send us a suggestion!" @bind-Value="@NewCategory.Category"></InputText></p>
+                    <p><Microsoft.AspNetCore.Components.Forms.InputText id="categoryName" class="form-control" placeholder="No category you are interested? Send us a suggestion!" @bind-Value="@NewCategory.Category"></Microsoft.AspNetCore.Components.Forms.InputText></p>
                 <ValidationMessage For="@(()=>NewCategory.Category)" />
 
                 <p><button type="submit" class="btn btn-success">Add category</button></p>

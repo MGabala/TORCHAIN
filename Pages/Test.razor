@@ -1,0 +1,27 @@
+﻿@page "/test"
+
+
+
+<Markdown Value="@markdownValue" ValueChanged="@OnMarkdownValueChanged" SpellChecker="false" />
+
+@code {
+    string markdownValue = "";
+
+    string markdownHtml;
+
+    protected override void OnInitialized()
+    {
+        markdownHtml = Markdig.Markdown.ToHtml(markdownValue ?? string.Empty);
+
+        base.OnInitialized();
+    }
+
+    Task OnMarkdownValueChanged(string value)
+    {
+        markdownValue = value;
+
+        markdownHtml = Markdig.Markdown.ToHtml(markdownValue ?? string.Empty);
+
+        return Task.CompletedTask;
+    }
+}
