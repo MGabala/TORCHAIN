@@ -10,6 +10,7 @@ using System.Net.WebSockets;
 using System.Threading;
 
 using TORCHAIN.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace TORCHAIN.Components.CryptoTracker
 {
@@ -170,5 +171,18 @@ namespace TORCHAIN.Components.CryptoTracker
             #endregion
           
         }
+
+        #region PassingValueFromOnePageToAnother
+        [Inject]
+        NavigationManager NavigationManager { get; set; }
+        public void Apply()
+        {
+            NavigationManager.NavigateTo("/", new NavigationOptions()
+            {
+                HistoryEntryState = "Test"
+                
+            });
+        }
+        #endregion
     }
 }
